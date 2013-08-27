@@ -1,0 +1,23 @@
+<template name="teamsSidebar">
+	<div class="col-md-3">
+		<h3>Submitted Bids</h3>
+		<div class="table-responsive">
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Team</th>
+						<th><div class="text-center">Submitted</div></th>
+					</tr>
+				</thead>
+				<tbody>
+					{{#each teams }}
+						<tr>
+							<td>{{ name }}</td>
+							<td><div class="text-center"><span class="glyphicon glyphicon-ok"></span></div></td>
+						</tr>
+					{{/each }}
+				</tbody>
+			</table>
+		</div>
+	</div>
+</template>

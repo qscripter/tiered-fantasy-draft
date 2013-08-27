@@ -1,0 +1,47 @@
+<template name="teamDetail">
+	<div class="row">
+		<div class="col-md-8 col-md-offset-2">
+			<div class="pull-left">
+				<h2>{{ team.name }}</h2>
+			</div>
+			<div class="pull-right">
+				<form class="form-inline">
+					<div class="form-group">
+						<input type="text" class="form-control" id="playerName" placeholder="Player Name">
+					</div>
+					<a class="btn btn-primary" id="addPlayer">Add Player</a>
+				</form>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-8 col-md-offset-2">
+			<div class="table-responsive">
+				<table class="table">
+					<thead>
+						<tr>
+							<th>Player</th>
+							<th>Team</th>
+							<th>Bye</th>
+							<th>Position</th>
+							<th>Salary</th>
+							<th>Contract Years</th>
+						</tr>
+					</thead>
+					<tbody>
+						{{#each team.roster}}
+							<tr>
+								<td>{{ player.name }}</td>
+								<td>{{ player.team }}</td>
+								<td>{{ player.bye }}</td>
+								<td>{{ player.position }}</td>
+								<td>{{ salary }}</td>
+								<td>{{ contractYears }}</td>
+							</tr>
+						{{/each }}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</template>

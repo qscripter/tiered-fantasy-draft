@@ -6,7 +6,8 @@ Template.teams.events({
 	'click #createTeam': function (event) {
 		var teamName = $('#teamName').val();
 		data = {
-			name: teamName
+			name: teamName,
+			roster: []
 		};
 		Teams.insert(data);
 		$('#teamName').val("");
