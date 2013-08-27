@@ -2,16 +2,27 @@
 	<div class="row">
 		{{> teamsSidebar }}
 		<div class="col-md-6">
-			<h3>Tier: {{ tier.name }}</h3>
+			<div class="pull-left">
+				<h3>Tier: {{ tier.name }}</h3>
+			</div>
+			<div class="pull-right">
+				<form class="form-inline">
+					<div class="form-group">
+						<input type="text" class="form-control" id="playerName" placeholder="Player Name">
+					</div>
+					<a class="btn btn-primary" id="addPlayer">Add Player</a>
+				</form>
+			</div>
 			<div class="table-responsive">
 				<table class="table">
 					<thead>
 						<tr>
 							<th>Name</th>
 							<th>Team</th>
-							<th>BYE</th>
-							<th>POS</th>
+							<th>Bye</th>
+							<th>Pos</th>
 							<th>Bid</th>
+							<th></th>
 						</tr>
 					</thead>
 					<tbody>
@@ -24,6 +35,7 @@
 								<td>
 									<div class="pull-left">$ </div><input type="text" class="form-control bid">	
 								</td>
+								<td><span class="glyphicon glyphicon-trash deletePlayer"></span></td>
 							</tr>
 						{{/each }}
 					</tbody>
