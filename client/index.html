@@ -26,11 +26,14 @@
 				<a class="navbar-brand" href="#">Real Fantasy Football</a>
 			</div>
 			<div class="collapse navbar-collapse">
+				{{#if currentUser }}
 				<ul class="nav navbar-nav">
 					<li><a href="/">Home</a></li>
 					<li><a href="/tiers">Tiers</a></li>
 					<li><a href="/teams">Teams</a></li>
 				</ul>
+				{{/if }}
+				{{ loginButtons }}
 			</div><!--/.nav-collapse -->
 		</div>
     </div>
