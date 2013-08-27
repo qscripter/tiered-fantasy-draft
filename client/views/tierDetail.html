@@ -1,0 +1,42 @@
+<template name="tierDetail">
+	<div class="row">
+		<div class="col-md-6">
+			<h1>{{ tier.name }}</h1>
+			<div class="table-responsive">
+				<table class="table">
+					<thead>
+						<tr>
+							<th>Name</th>
+							<th>Team</th>
+							<th>BYE</th>
+							<th>POS</th>
+							<th>Bid</th>
+						</tr>
+					</thead>
+					<tbody>
+						{{#each players }}
+							<tr>
+								<td>{{ name }}</td>
+								<td>{{ team }}</td>
+								<td>{{ bye }}</td>
+								<td>{{ position }}</td>
+								<td>
+									<div class="pull-left">$ </div><input type="text" class="form-control bid">	
+								</td>
+							</tr>
+						{{/each }}
+					</tbody>
+				</table>
+			</div>
+			<div class="pull-left">
+				Max number of players to take
+				<select id="playersToTake" class="form-control">
+					{{#each players}}
+						<option>{{ indexOfPlayer _id }}</option>
+					{{/each }}
+				</select>
+			</div>
+			<div class="pull-right"><a class="btn btn-lg btn-primary">Submit Bids</a></div>
+		</div>
+	</div>
+</template>

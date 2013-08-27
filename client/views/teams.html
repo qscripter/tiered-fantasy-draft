@@ -1,0 +1,34 @@
+<template name="teams">
+	<div class="row">
+		<div class="col-md-6 col-md-offset-3 text-center">
+			<form class="form-inline">
+				<div class="form-group">
+					<input type="text" class="form-control" id="teamName" placeholder="Team Name">
+				</div>
+				<a class="btn btn-primary" id="createTeam">Create Team</a>
+			</form>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-6 col-md-offset-3">
+			<div class="table-responsive">
+				<table class="table">
+					<thead>
+						<tr>
+							<th>Name</th>
+							<th>Owner</th>
+						</tr>
+					</thead>
+					<tbody>
+						{{#each teams }}
+							<tr>
+								<td><a href="/teams/{{ _id }}">{{ name }}</a></td>
+								<td>{{ owner }}</td>
+							</tr>
+						{{/each }}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</template>

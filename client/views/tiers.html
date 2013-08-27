@@ -1,0 +1,32 @@
+<template name="tiers">
+	<div class="row">
+		<div class="col-md-6 col-md-offset-3 text-center">
+			<form class="form-inline">
+				<div class="form-group">
+					<input type="text" class="form-control" id="tierName" placeholder="Tier Name">
+				</div>
+				<a class="btn btn-primary" id="createTier">Create Tier</a>
+			</form>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-6 col-md-offset-3">
+			<div class="table-responsive">
+				<table class="table">
+					<thead>
+						<tr>
+							<th>Name</th>
+						</tr>
+					</thead>
+					<tbody>
+						{{#each tiers }}
+							<tr>
+								<td><a href="/tiers/{{ _id }}">{{ name }}</a></td>
+							</tr>
+						{{/each }}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</template>

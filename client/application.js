@@ -2,13 +2,15 @@
 Meteor.Router.add({
 	'/': 'main',
 	'/tiers/:id': function (id) {
-		Session.set("currentTier", id);
-		return 'tiers';
+		Session.set("selectedTier", id);
+		return 'tierDetail';
 	},
+	'/tiers': 'tiers',
 	'/teams/:id': function (id) {
 		Session.set("selectedTeam", id);
-		return 'teams';
-	}
+		return 'teamDetail';
+	},
+	'/teams': 'teams'
 });
 
 Meteor.Router.filters({
