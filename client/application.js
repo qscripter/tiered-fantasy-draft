@@ -1,3 +1,5 @@
+Meteor.subscribe("users");
+
 //Routes
 Meteor.Router.add({
 	'/': 'main',

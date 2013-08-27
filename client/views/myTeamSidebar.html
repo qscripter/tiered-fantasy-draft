@@ -6,11 +6,29 @@
 				<thead>
 					<tr>
 						<th>Player</th>
-						<th>Pos</th>
+						<th></th>
 						<th>Bye</th>
 						<th>$$</th>
 					</tr>
 				</thead>
+				<tbody>
+					{{#each team.roster }}
+						<tr>
+							<td>{{ player.name }}</td>
+							<td>{{ player.position }}</td>
+							<td>{{ player.bye }}</td>
+							<td>${{ salary }}</td>
+						</tr>
+					{{/each }}
+					<tr>
+						<td colspan="3">
+							<div class="pull-right">
+								Total Salary:
+							</div>
+						</td>
+						<td>${{ totalSalary }}</td>
+					</tr>
+				</tbody>
 			</table>
 		</div>
 	</div>
