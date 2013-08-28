@@ -32,13 +32,19 @@ Template.tierDetail.playerBid = function () {
 	return Bids.findOne({player: this._id});
 };
 
-Template.tierDetail.rendered = function () {
-	var players = Players.find().fetch();
+function initTypeahead (players) {
 	$('#playerName').typeahead({
 		name: 'playerName',
 		valueKey: 'name',
 		local: players
 	});
+}
+
+Template.tierDetail.rendered = function () {
+	var players = Players.find().fetch();
+	if (players.length > 0) {
+		initTypeahead(players);
+	}
 	//$('.tt-query').css('background-color','#fff');
 };
 

@@ -19,13 +19,30 @@
 						<tr>
 							<th>Name</th>
 							<th>Owner</th>
+							{{#if isInRole 'admin'}}
+								<th></th>
+							{{/if }}
 						</tr>
 					</thead>
 					<tbody>
 						{{#each teams }}
 							<tr>
 								<td><a href="/teams/{{ _id }}">{{ name }}</a></td>
-								<td>{{ ownerEmail }}</td>
+								<td>
+									{{#if isInRole 'admin' }}
+										<select class="form-control ownerSelect">
+											<option></option>
+											{{#each users }}
+												<option id={{ _id }} {{#if owner ../_id }}selected{{/if}}>{{ email }}</option>
+											{{/each }}
+										</select>
+									{{ else }}
+										{{ ownerEmail }}
+									{{/if }}
+								</td>
+								{{#if isInRole 'admin' }}
+									<td class="deleteTeam"><span class="glyphicon glyphicon-trash"></span></td>
+								{{/if }}
 							</tr>
 						{{/each }}
 					</tbody>

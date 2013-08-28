@@ -41,12 +41,12 @@
 									</div>
 								</td>
 								<td>
-									{{#if completed }}
+									{{#if complete }}
 										<div class="text-center"><span class="glyphicon glyphicon-ok"></span></div>
 									{{/if }}
 								</td>
 								{{#if isInRole 'admin' }}
-								<td><span class="glyphicon glyphicon-trash"></span></td>
+								<td class="deleteTier"><span class="glyphicon glyphicon-trash"></span></td>
 								{{/if }}
 							</tr>
 						{{/each }}

@@ -6,4 +6,5 @@ Meteor.startup(function () {
 	}
 	var qscripterId = Meteor.users.findOne({"emails.0.address": "qscripter@gmail.com"})._id;
 	Roles.addUsersToRoles(qscripterId, ['admin']);
+	//Tiers.remove({}, {multi: true});
 });

@@ -16,5 +16,8 @@ Template.tiers.events({
 	},
 	'click .activeRadio': function (event) {
 		Meteor.call("setActiveTier", this._id);
+	},
+	'click .deleteTier': function (event) {
+		Meteor.call("deleteTier", this._id);
 	}
 });
