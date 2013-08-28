@@ -20,5 +20,8 @@ Template.teamDetail.events({
 	'click #addPlayer': function (event) {
 		var playerName = $("#playerName").val();
 		Meteor.call("addPlayerToTeam", playerName, Session.get("selectedTeam"));
+	},
+	'click .deletePlayer': function (event) {
+		Meteor.call("removePlayerFromTeam", this.player_id, Session.get("selectedTeam"));
 	}
 });
