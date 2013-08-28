@@ -1,12 +1,14 @@
 <template name="teams">
 	<div class="row">
 		<div class="col-md-6 col-md-offset-3 text-center">
+			{{#if isInRole 'admin' }}
 			<form class="form-inline">
 				<div class="form-group">
 					<input type="text" class="form-control" id="teamName" placeholder="Team Name">
 				</div>
 				<a class="btn btn-primary" id="createTeam">Create Team</a>
 			</form>
+			{{/if }}
 		</div>
 	</div>
 	<div class="row">

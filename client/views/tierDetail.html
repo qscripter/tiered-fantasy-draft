@@ -5,14 +5,16 @@
 			<div class="pull-left">
 				<h3>Tier: {{ tier.name }}</h3>
 			</div>
-			<div class="pull-right">
-				<form class="form-inline">
-					<div class="form-group">
-						<input type="text" class="form-control" id="playerName" placeholder="Player Name">
-					</div>
-					<a class="btn btn-primary" id="addPlayer">Add Player</a>
-				</form>
-			</div>
+			{{#if isInRole 'admin' }}
+				<div class="pull-right">
+					<form class="form-inline">
+						<div class="form-group">
+							<input type="text" class="form-control" id="playerName" placeholder="Player Name">
+						</div>
+						<a class="btn btn-primary" id="addPlayer">Add Player</a>
+					</form>
+				</div>
+			{{/if }}
 			<div class="table-responsive">
 				<table class="table">
 					<thead>
@@ -22,7 +24,9 @@
 							<th>Bye</th>
 							<th>Pos</th>
 							<th>Bid</th>
+							{{#if isInRole 'admin' }}
 							<th></th>
+							{{/if }}
 						</tr>
 					</thead>
 					<tbody>
@@ -35,7 +39,9 @@
 								<td>
 									<div class="pull-left">$ </div><input type="text" class="form-control bid">	
 								</td>
+								{{#if isInRole 'admin' }}
 								<td><span class="glyphicon glyphicon-trash deletePlayer"></span></td>
+								{{/if }}
 							</tr>
 						{{/each }}
 					</tbody>

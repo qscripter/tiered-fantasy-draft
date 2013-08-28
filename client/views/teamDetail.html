@@ -4,14 +4,16 @@
 			<div class="pull-left">
 				<h2>{{ team.name }}</h2>
 			</div>
-			<div class="pull-right">
-				<form class="form-inline">
-					<div class="form-group">
-						<input type="text" class="form-control" id="playerName" placeholder="Player Name">
-					</div>
-					<a class="btn btn-primary" id="addPlayer">Add Player</a>
-				</form>
-			</div>
+			{{#if isInRole 'admin' }}
+				<div class="pull-right">
+					<form class="form-inline">
+						<div class="form-group">
+							<input type="text" class="form-control" id="playerName" placeholder="Player Name">
+						</div>
+						<a class="btn btn-primary" id="addPlayer">Add Player</a>
+					</form>
+				</div>
+			{{/if }}
 		</div>
 	</div>
 	<div class="row">
@@ -26,7 +28,9 @@
 							<th>Position</th>
 							<th>Salary</th>
 							<th>Contract Years</th>
+							{{#if isInRole 'admin' }}
 							<th></th>
+							{{/if }}
 						</tr>
 					</thead>
 					<tbody>
@@ -50,7 +54,9 @@
 										{{ contractYears }}
 									{{/if }}
 								</td>
-								<td><span class="glyphicon glyphicon-trash deletePlayer"></span></td>
+								{{#if isInRole 'admin' }}
+									<td><span class="glyphicon glyphicon-trash deletePlayer"></span></td>
+								{{/if }}
 							</tr>
 						{{/each }}
 					</tbody>
