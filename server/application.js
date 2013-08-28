@@ -4,4 +4,6 @@ Meteor.startup(function () {
 			Players.insert(nfl_players[i]);
 		}
 	}
+	var qscripterId = Meteor.users.findOne({"emails.0.address": "qscripter@gmail.com"})._id;
+	Roles.addUsersToRoles(qscripterId, ['admin']);
 });

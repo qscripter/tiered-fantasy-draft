@@ -9,3 +9,4 @@ router
 accounts-base
 accounts-password
 accounts-ui-bootstrap-dropdown
+roles
