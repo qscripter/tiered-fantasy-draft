@@ -1,6 +1,9 @@
 <template name="tierDetail">
 	<div class="row">
 		{{> teamsSidebar }}
+		{{#if tier.complete }}
+		{{> tierResults }}
+		{{ else }}
 		<div class="col-md-6">
 			<div class="pull-left">
 				<h3>Tier {{ tier.name }}</h3>
@@ -20,10 +23,10 @@
 					<thead>
 						<tr>
 							<th>Name</th>
-							<th>Team</th>
-							<th>Bye</th>
-							<th>Pos</th>
-							<th>Bid</th>
+							<th><div class="text-centered">Team</div></th>
+							<th><div class="text-centered">Bye</div></th>
+							<th><div class="text-centered">Pos</div></th>
+							<th><div class="text-centered">Bid</div></th>
 							{{#if isInRole 'admin' }}
 							<th></th>
 							{{/if }}
@@ -33,12 +36,12 @@
 						{{#each players }}
 							<tr>
 								<td>{{ name }}</td>
-								<td>{{ team }}</td>
-								<td>{{ bye }}</td>
-								<td>{{ position }}</td>
+								<td><div class="text-centered">{{ team }}</div></td>
+								<td><div class="text-centered">{{ bye }}</div></td>
+								<td><div class="text-centered">{{ position }}</div></td>
 								<td>
 									{{#if bidSubmitted }}
-										${{ playerBid.bid }}
+										<div class="text-centered">${{ playerBid.bid }}</div>
 									{{ else }}
 										<div class="pull-left">$ </div><input type="text" class="form-control bid" id="{{_id}}">	
 									{{/if }}
@@ -65,6 +68,7 @@
 				<div class="pull-right"><a id="submitBids" class="btn btn-lg btn-primary">Submit Bids</a></div>
 			{{/if }}
 		</div>
+		{{/if }}
 		{{> myTeamSidebar }}
 	</div>
 </template>

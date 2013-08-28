@@ -9,6 +9,9 @@ Meteor.publish("teams", function () {
 Teams.allow({
 	insert: function (userId, team) {
 		return Roles.userIsInRole(userId, ['admin']);
+	},
+	update: function (userId, team) {
+		return Roles.userIsInRole(userId, ['admin']);
 	}
 });
 
@@ -22,6 +25,9 @@ Meteor.publish("tiers", function () {
 
 Tiers.allow({
 	insert: function (userId, tier) {
+		return Roles.userIsInRole(userId, ['admin']);
+	},
+	update: function (userId, tier) {
 		return Roles.userIsInRole(userId, ['admin']);
 	}
 });

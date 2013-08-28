@@ -1,0 +1,31 @@
+<template name="tierResults">
+	<div class="col-md-6">
+		<h3>Tier {{ tier.name }} Results</h3>
+		<div class="table-responsive">
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Name</th>
+						<th><div class="text-center">Team</div></th>
+						<th><div class="text-center">Bye</div></th>
+						<th><div class="text-center">Pos</div></th>
+						<th><div class="text-center">Winning Team</div></th>
+						<th><div class="text-center">Salary</div></th>
+					</tr>
+				</thead>
+				<tbody>
+					{{#each tier.winningBids }}
+						<tr>
+							<td>{{ playerObj.name }}</td>
+							<td><div class="text-center">{{ playerObj.team }}</div></td>
+							<td><div class="text-center">{{ playerObj.bye }}</div></td>
+							<td><div class="text-center">{{ playerObj.position }}</div></td>
+							<td><div class="text-center"><a href="/teams/{{ teamObj._id }}">{{ teamObj.name }}</a></div></td>
+							<td><div class="text-center">${{ salary }}</div></td>
+						</tr>
+					{{/each }}
+				</tbody>
+			</table>
+		</div>
+	</div>
+</template>
