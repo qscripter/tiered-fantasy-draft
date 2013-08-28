@@ -1,4 +1,7 @@
 Meteor.subscribe("users");
+Meteor.subscribe("tiers");
+Meteor.subscribe("teams");
+Meteor.subscribe("players");
 
 //Routes
 Meteor.Router.add({
