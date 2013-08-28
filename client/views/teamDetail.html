@@ -36,8 +36,20 @@
 								<td>{{ player.team }}</td>
 								<td>{{ player.bye }}</td>
 								<td>{{ player.position }}</td>
-								<td>{{ salary }}</td>
-								<td>{{ contractYears }}</td>
+								<td class="salary">
+									{{#if salaryEdit }}
+										<input type="text" class="form-control salaryInput" value="{{ salary}}">
+									{{ else }}
+										{{ salary }}
+									{{/if }}
+								</td>
+								<td class="contract">
+									{{#if contractEdit }}
+										<input type="text" class="form-control contractInput" value="{{ contractYears }}">
+									{{ else }}
+										{{ contractYears }}
+									{{/if }}
+								</td>
 								<td><span class="glyphicon glyphicon-trash deletePlayer"></span></td>
 							</tr>
 						{{/each }}
