@@ -25,3 +25,10 @@ Tiers.allow({
 		return Roles.userIsInRole(userId, ['admin']);
 	}
 });
+
+Meteor.publish("bids", function () {
+	var team = Teams.findOne({owner: this.userId});
+	if (team) {
+		return Bids.find({team: team._id});
+	}
+});

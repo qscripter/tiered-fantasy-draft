@@ -13,7 +13,11 @@
 					{{#each teams }}
 						<tr>
 							<td>{{ name }}</td>
-							<td><div class="text-center"><span class="glyphicon glyphicon-ok"></span></div></td>
+							<td>
+								{{#if bidSubmitted }}
+									<div class="text-center"><span class="glyphicon glyphicon-ok"></span></div>
+								{{/if }}
+							</td>
 						</tr>
 					{{/each }}
 				</tbody>

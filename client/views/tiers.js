@@ -13,5 +13,8 @@ Template.tiers.events({
 		};
 		Tiers.insert(data);
 		$('#tierName').val("");
+	},
+	'click .activeRadio': function (event) {
+		Meteor.call("setActiveTier", this._id);
 	}
 });

@@ -18,12 +18,36 @@
 					<thead>
 						<tr>
 							<th>Name</th>
+							<th><div class="text-center">Active</div></th>
+							<th><div class="text-center">Completed</div></th>
+							{{#if isInRole 'admin' }}
+							<th></th>
+							{{/if }}
 						</tr>
 					</thead>
 					<tbody>
 						{{#each tiers }}
 							<tr>
 								<td><a href="/tiers/{{ _id }}">{{ name }}</a></td>
+								<td>
+									<div class="text-center">
+										{{#if isInRole 'admin'}}
+											<input type="radio" class="activeRadio" name="activeRadios" {{#if active}}checked{{/if }}>
+										{{ else }}
+											{{#if active }}
+												<div class="text-center"><span class="glyphicon glyphicon-ok"></span></div>
+											{{/if }}
+										{{/if }}
+									</div>
+								</td>
+								<td>
+									{{#if completed }}
+										<div class="text-center"><span class="glyphicon glyphicon-ok"></span></div>
+									{{/if }}
+								</td>
+								{{#if isInRole 'admin' }}
+								<td><span class="glyphicon glyphicon-trash"></span></td>
+								{{/if }}
 							</tr>
 						{{/each }}
 					</tbody>

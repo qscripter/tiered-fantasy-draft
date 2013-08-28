@@ -3,7 +3,7 @@
 		{{> teamsSidebar }}
 		<div class="col-md-6">
 			<div class="pull-left">
-				<h3>Tier: {{ tier.name }}</h3>
+				<h3>Tier {{ tier.name }}</h3>
 			</div>
 			{{#if isInRole 'admin' }}
 				<div class="pull-right">
@@ -37,7 +37,11 @@
 								<td>{{ bye }}</td>
 								<td>{{ position }}</td>
 								<td>
-									<div class="pull-left">$ </div><input type="text" class="form-control bid">	
+									{{#if bidSubmitted }}
+										${{ playerBid.bid }}
+									{{ else }}
+										<div class="pull-left">$ </div><input type="text" class="form-control bid" id="{{_id}}">	
+									{{/if }}
 								</td>
 								{{#if isInRole 'admin' }}
 								<td><span class="glyphicon glyphicon-trash deletePlayer"></span></td>
@@ -47,15 +51,19 @@
 					</tbody>
 				</table>
 			</div>
-			<div class="pull-left">
-				Max number of players to take
-				<select id="playersToTake" class="form-control">
-					{{#each players}}
-						<option>{{ indexOfPlayer _id }}</option>
-					{{/each }}
-				</select>
-			</div>
-			<div class="pull-right"><a class="btn btn-lg btn-primary">Submit Bids</a></div>
+			{{#if bidSubmitted }}
+				<div class="text-center"><h4>Waiting for other teams . . .</h4></div>
+			{{ else }}
+				<div class="pull-left">
+					Max number of players to take
+					<select id="playersToTake" class="form-control">
+						{{#each players}}
+							<option>{{ indexOfPlayer _id }}</option>
+						{{/each }}
+					</select>
+				</div>
+				<div class="pull-right"><a id="submitBids" class="btn btn-lg btn-primary">Submit Bids</a></div>
+			{{/if }}
 		</div>
 		{{> myTeamSidebar }}
 	</div>
