@@ -47,10 +47,14 @@ Template.myTeamSidebar.getPositionPlayers = function (position) {
 	return getPositionPlayers(position);
 };
 
-Template.myTeamSidebar.checkForPositionPlayers = function (position) {
+Template.myTeamSidebar.remainingSlots = function (position) {
 	var players = getPositionPlayers(position);
-	if (players) {
-		return players.count() > 0;
+	var league = Leagues.findOne();
+	if (league && players) {
+		var requiredPlayers = _.filter(league.positions, function (item) {
+			return item.position == position;
+		})[0].required;
+		return requiredPlayers - players.count();
 	}
 };
 

@@ -13,25 +13,22 @@
 				</thead>
 				<tbody>
 					{{#each league.positions }}
-						{{#if checkForPositionPlayers position }}
-							{{#each getPositionPlayers position }}
-								<tr>
-									<td><div class="text-center"><span class="position {{../position }}">{{ ../position }}</span></div></td>
-									<td>{{ name }}</td>
-									<td><div class="text-center">{{ bye }}</div></td>
-									<td><div class="pull-right">${{ getSalary _id }}</div></td>
-								</tr>
-							{{/each}}
-						{{ else }}
-							{{#times required }}
-								<tr>
-									<td><div class="text-center"><span class="position {{ position }}">{{ position }}</span></div></td>
-									<td></td>
-									<td></td>
-									<td></td>
-								</tr>
-							{{/times }}
-						{{/if }}
+						{{#each getPositionPlayers position }}
+							<tr>
+								<td><div class="text-center"><span class="position {{../position }}">{{ ../position }}</span></div></td>
+								<td>{{ name }}</td>
+								<td><div class="text-center">{{ bye }}</div></td>
+								<td><div class="pull-right">${{ getSalary _id }}</div></td>
+							</tr>
+						{{/each}}
+						{{#times remainingSlots position }}
+							<tr>
+								<td><div class="text-center"><span class="position {{ position }}">{{ position }}</span></div></td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+						{{/times }}
 					{{/each }}
 					<tr>
 						<td colspan="3">
