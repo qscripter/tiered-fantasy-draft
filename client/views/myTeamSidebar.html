@@ -1,6 +1,19 @@
 <template name="myTeamSidebar">
 	<div class="col-md-3">
-		<h3>{{ team.name }}</h3>
+		<ul class="nav nav-pills">
+			<li>
+				<div class="dropdown">
+					<a data-toggle="dropdown" href="#"><h3>{{ team.name }} <b class="caret"></b></h3></a>
+					<ul class="dropdown-menu" role="menu">
+						{{#each teams }}
+							<li>
+								<a class="teamSelect">{{ name }}</a>
+							</li>
+						{{/each}}
+					</ul>
+				</div>	
+			</li>
+		</ul>
 		<div class="table-responsive">
 			<table class="table">
 				<thead>

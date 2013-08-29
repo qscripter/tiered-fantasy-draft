@@ -1,6 +1,11 @@
 Meteor.subscribe("users");
 Meteor.subscribe("tiers");
-Meteor.subscribe("teams");
+Meteor.subscribe("teams", function () {
+	var team = Teams.findOne({owner: Meteor.userId()});
+	if (team) {
+		Session.set("selectedSidebarTeam", team._id);
+	}
+});
 Meteor.subscribe("players");
 Meteor.subscribe("bids");
 Meteor.subscribe("leagues");

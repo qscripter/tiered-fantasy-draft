@@ -1,5 +1,5 @@
 function getPositionPlayers (position) {
-	var myTeam = Teams.findOne({owner: Meteor.userId()});
+	var myTeam = Teams.findOne(Session.get("selectedSidebarTeam"));
 	if (myTeam) {
 		var playerIds = _.map(myTeam.roster, function (roster) {
 			return roster.player_id;
@@ -10,8 +10,12 @@ function getPositionPlayers (position) {
 }
 
 Template.myTeamSidebar.team = function () {
-	var myTeam = Teams.findOne({owner: Meteor.userId()});
+	var myTeam = Teams.findOne(Session.get("selectedSidebarTeam"));
 	return myTeam;
+};
+
+Template.myTeamSidebar.teams = function () {
+	return Teams.find();
 };
 
 Template.myTeamSidebar.player = function () {
@@ -19,7 +23,7 @@ Template.myTeamSidebar.player = function () {
 };
 
 Template.myTeamSidebar.totalSalary = function () {
-	var myTeam = Teams.findOne({owner: Meteor.userId()});
+	var myTeam = Teams.findOne(Session.get("selectedSidebarTeam"));
 	if (myTeam) {
 		var salary = _.reduce(myTeam.roster, function (memo, roster) {
 			return memo + roster.salary;
@@ -29,7 +33,7 @@ Template.myTeamSidebar.totalSalary = function () {
 };
 
 Template.myTeamSidebar.maxBid = function () {
-	var myTeam = Teams.findOne({owner: Meteor.userId()});
+	var myTeam = Teams.findOne(Session.get("selectedSidebarTeam"));
 	if (myTeam) {
 		var salary = _.reduce(myTeam.roster, function (memo, roster) {
 			return memo + roster.salary;
@@ -59,7 +63,7 @@ Template.myTeamSidebar.remainingSlots = function (position) {
 };
 
 Template.myTeamSidebar.getSalary = function (playerId) {
-	var myTeam = Teams.findOne({owner: Meteor.userId()});
+	var myTeam = Teams.findOne(Session.get("selectedSidebarTeam"));
 	if (myTeam) {
 		return _.find(myTeam.roster, function (roster) {
 			return roster.player_id == playerId;
@@ -69,8 +73,14 @@ Template.myTeamSidebar.getSalary = function (playerId) {
 
 Template.myTeamSidebar.playersNeeded = function () {
 	var league = Leagues.findOne();
-	var myTeam = Teams.findOne({owner: Meteor.userId()});
+	var myTeam = Teams.findOne(Session.get("selectedSidebarTeam"));
 	if (league && myTeam) {
 		return league.minRosterSize - myTeam.roster.length;
 	}
 };
+
+Template.myTeamSidebar.events({
+	'click .teamSelect': function (event) {
+		Session.set("selectedSidebarTeam", this._id);
+	}
+});
