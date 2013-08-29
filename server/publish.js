@@ -38,3 +38,19 @@ Meteor.publish("bids", function () {
 		return Bids.find({team: team._id});
 	}
 });
+
+Meteor.publish("leagues", function () {
+	return Leagues.find();
+});
+
+Leagues.allow({
+	insert: function (userId, league) {
+		return Roles.userIsInRole(userId, ['admin']);
+	},
+	update: function (userId, league) {
+		return Roles.userIsInRole(userId, ['admin']);
+	},
+	remove: function (userId, league) {
+		return Roles.userIsInRole(userId, ['admin']);
+	}
+});

@@ -6,7 +6,7 @@
 				<thead>
 					<tr>
 						<th>Team</th>
-						<th>$$</th>
+						<th><div class="pull-right">$$</div></th>
 						<th><div class="text-center">Bid</div></th>
 					</tr>
 				</thead>
@@ -14,7 +14,7 @@
 					{{#each teams }}
 						<tr>
 							<td><a href="/teams/{{ _id }}">{{ name }}</a></td>
-							<td>${{ salaryCommitted }}</td>
+							<td><div class="pull-right">${{ salaryCommitted }}</div></td>
 							<td>
 								{{#if bidSubmitted }}
 									<div class="text-center"><span class="glyphicon glyphicon-ok green"></span></div>

@@ -38,7 +38,7 @@
 								<td>{{ name }}</td>
 								<td><div class="text-centered">{{ team }}</div></td>
 								<td><div class="text-centered">{{ bye }}</div></td>
-								<td><div class="text-centered">{{ position }}</div></td>
+								<td><div class="text-centered"><span class="position {{position}}">{{ position }}</span></div></td>
 								<td>
 									{{#if bidSubmitted }}
 										<div class="text-centered">${{ playerBid.bid }}</div>

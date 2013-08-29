@@ -3,6 +3,7 @@ Meteor.subscribe("tiers");
 Meteor.subscribe("teams");
 Meteor.subscribe("players");
 Meteor.subscribe("bids");
+Meteor.subscribe("leagues");
 
 //Routes
 Meteor.Router.add({

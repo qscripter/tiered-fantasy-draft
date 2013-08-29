@@ -5,28 +5,41 @@
 			<table class="table">
 				<thead>
 					<tr>
-						<th>Player</th>
 						<th></th>
+						<th>Player</th>
 						<th><div class="text-center">Bye</div></th>
-						<th>$$</th>
+						<th><div class="pull-right">$$</div></th>
 					</tr>
 				</thead>
 				<tbody>
-					{{#each team.roster }}
-						<tr>
-							<td>{{ player.name }}</td>
-							<td>{{ player.position }}</td>
-							<td><div class="text-center">{{ player.bye }}</div></td>
-							<td>${{ salary }}</td>
-						</tr>
+					{{#each league.positions }}
+						{{#if checkForPositionPlayers position }}
+							{{#each getPositionPlayers position }}
+								<tr>
+									<td><div class="text-center"><span class="position {{../position }}">{{ ../position }}</span></div></td>
+									<td>{{ name }}</td>
+									<td><div class="text-center">{{ bye }}</div></td>
+									<td><div class="pull-right">${{ getSalary _id }}</div></td>
+								</tr>
+							{{/each}}
+						{{ else }}
+							{{#times required }}
+								<tr>
+									<td><div class="text-center"><span class="position {{ position }}">{{ position }}</span></div></td>
+									<td></td>
+									<td></td>
+									<td></td>
+								</tr>
+							{{/times }}
+						{{/if }}
 					{{/each }}
 					<tr>
 						<td colspan="3">
 							<div class="pull-right">
-								Total Salary:
+								Total Allocated Salary:
 							</div>
 						</td>
-						<td>${{ totalSalary }}</td>
+						<td><div class="pull-right">${{ totalSalary }}</div></td>
 					</tr>
 					<tr>
 						<td colspan="3">
@@ -34,7 +47,15 @@
 								Maximum Bid:
 							</div>
 						</td>
-						<td>${{ maxBid }}</td>
+						<td><div class="pull-right">${{ maxBid }}</div></td>
+					</tr>
+					<tr>
+						<td colspan="3">
+							<div class="pull-right">
+								Players Needed:
+							</div>
+						</td>
+						<td><div class="pull-right">{{ playersNeeded }}</div></td>
 					</tr>
 				</tbody>
 			</table>

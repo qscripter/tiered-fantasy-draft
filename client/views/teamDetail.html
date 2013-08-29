@@ -25,8 +25,8 @@
 							<th>Player</th>
 							<th><div class="text-center">Team</div></th>
 							<th><div class="text-center">Bye</div></th>
-							<th><div class="text-center">Position</div></th>
-							<th><div class="text-center">Salary</div></th>
+							<th><div class="text-center">Pos</div></th>
+							<th>$$</th>
 							<th><div class="text-center">Contract Years</div></th>
 							{{#if isInRole 'admin' }}
 							<th></th>
@@ -44,7 +44,7 @@
 									{{#if salaryEdit }}
 										<input type="text" class="form-control salaryInput" value="{{ salary}}">
 									{{ else }}
-										<div class="text-center">{{ salary }}</div>
+										${{ salary }}
 									{{/if }}
 								</td>
 								<td class="contract">
