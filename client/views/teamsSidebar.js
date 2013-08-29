@@ -11,3 +11,9 @@ Template.teamsSidebar.bidSubmitted = function () {
 		});
 	}
 };
+
+Template.teamsSidebar.salaryCommitted = function () {
+	return _.reduce(this.roster, function (memo, roster){
+		return memo + roster.salary;
+	}, 0);
+};

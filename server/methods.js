@@ -42,7 +42,7 @@ function calculateWinningBid(tierId, playerId) {
 			winningSalary = bids[1].bid + 1; // next lowest salary + 1
 		}
 	} else {  // case for a tie
-		winningTeam = _.shuffle(winningBids)[0]; // shuffle the winning bids and take 0 index, ie randomly select the winning team
+		winningTeam = _.shuffle(winningBids)[0].team; // shuffle the winning bids and take 0 index, ie randomly select the winning team
 		winningSalary = winningBids[0].bid;
 	}
 
@@ -51,6 +51,7 @@ function calculateWinningBid(tierId, playerId) {
 		team: winningTeam,
 		salary: winningSalary
 	};
+
 	// add player to winning team
 	rosterEntry = {
 		player_id: playerId,

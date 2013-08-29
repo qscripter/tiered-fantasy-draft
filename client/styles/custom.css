@@ -3,6 +3,10 @@
 	height: 22px;
 }
 
+.green {
+  color: green;
+}
+
 .twitter-typeahead .tt-hint {
   display: block;
   width: 100%;
