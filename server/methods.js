@@ -145,7 +145,24 @@ Meteor.methods({
 		if (Roles.userIsInRole(this.userId, ['admin'])) {
 			var tier = Tiers.findOne(tierId);
 			Bids.remove({player: {$in: tier.players}});
+			// undo roster adds from tier
+			_.each(tier.players, function (player) {
+				Teams.update({"roster.player_id": player}, {$pull: {roster: {player_id: player}}});
+			});
 			Tiers.remove(tierId);
+		}
+	},
+	rollTierBack: function (tierId) {
+		if (Roles.userIsInRole(this.userId, ['admin'])) {
+			var tier = Tiers.findOne(tierId);
+			Bids.remove({player: {$in: tier.players}});
+			// undo roster adds from tier
+			_.each(tier.players, function (player) {
+				Teams.update({"roster.player_id": player}, {$pull: {roster: {player_id: player}}});
+			});
+			Tiers.update(tierId, {$set: {complete: false}});
+			Tiers.update(tierId, {$set: {winningBids: []}});
+			Tiers.update(tierId, {$set: {submissions: []}});
 		}
 	},
 	setTeamOwner: function (teamId, email) {
