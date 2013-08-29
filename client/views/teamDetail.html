@@ -23,11 +23,11 @@
 					<thead>
 						<tr>
 							<th>Player</th>
-							<th>Team</th>
-							<th>Bye</th>
-							<th>Position</th>
-							<th>Salary</th>
-							<th>Contract Years</th>
+							<th><div class="text-center">Team</div></th>
+							<th><div class="text-center">Bye</div></th>
+							<th><div class="text-center">Position</div></th>
+							<th><div class="text-center">Salary</div></th>
+							<th><div class="text-center">Contract Years</div></th>
 							{{#if isInRole 'admin' }}
 							<th></th>
 							{{/if }}
@@ -37,21 +37,21 @@
 						{{#each team.roster}}
 							<tr>
 								<td>{{ player.name }}</td>
-								<td>{{ player.team }}</td>
-								<td>{{ player.bye }}</td>
-								<td>{{ player.position }}</td>
+								<td><div class="text-center">{{ player.team }}</div></td>
+								<td><div class="text-center">{{ player.bye }}</div></td>
+								<td><div class="text-center">{{ player.position }}</div></td>
 								<td class="salary">
 									{{#if salaryEdit }}
 										<input type="text" class="form-control salaryInput" value="{{ salary}}">
 									{{ else }}
-										{{ salary }}
+										<div class="text-center">{{ salary }}</div>
 									{{/if }}
 								</td>
 								<td class="contract">
 									{{#if contractEdit }}
 										<input type="text" class="form-control contractInput" value="{{ contractYears }}">
 									{{ else }}
-										{{ contractYears }}
+										<div class="text-center">{{ contractYears }}</div>
 									{{/if }}
 								</td>
 								{{#if isInRole 'admin' }}

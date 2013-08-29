@@ -6,6 +6,7 @@ function calculateWinningBid(tierId, playerId) {
 		winningBids,
 		winningBid,
 		winningSalary,
+		winningTeam,
 		rosterEntry;
 	tier = Tiers.findOne(tierId);
 
@@ -29,40 +30,42 @@ function calculateWinningBid(tierId, playerId) {
 		winningBids.push(bids[i]);
 		i++;
 	}
-	console.log(bids);
+
 	// case where there is one maximum bidder
 	if (winningBids.length == 1) {
+		winningTeam = winningBids[0].team;
 		// determine winning salary
 		if (bids.length == 1) {
-			console.log("Foo");
 			// only one remaining bidder
 			winningSalary = 2; // minimum salary
 		} else {
-			console.log("bar");
 			winningSalary = bids[1].bid + 1; // next lowest salary + 1
 		}
-		console.log(winningSalary);
-		winningBid = {
-			player: playerId,
-			team: winningBids[0].team,
-			salary: winningSalary
-		};
-		// add player to winning team
-		rosterEntry = {
-			player_id: playerId,
-			salary: winningSalary,
-			contractYears: 1
-		};
-		// add player to team
-		Teams.update(winningBid.team, {$push: {roster: rosterEntry}});
-		// increment the won player total for the team in the tier
-		Tiers.update({
-			_id: tierId,
-			"submissions.team": winningBid.team
-		},
-		{$inc: {'submissions.$.playersWon': 1}});
-		Tiers.update(tierId, {$push: {winningBids: winningBid}});
+	} else {  // case for a tie
+		winningTeam = _.shuffle(winningBids)[0]; // shuffle the winning bids and take 0 index, ie randomly select the winning team
+		winningSalary = winningBids[0].bid;
 	}
+
+	winningBid = {
+		player: playerId,
+		team: winningTeam,
+		salary: winningSalary
+	};
+	// add player to winning team
+	rosterEntry = {
+		player_id: playerId,
+		salary: winningSalary,
+		contractYears: 1
+	};
+	// add player to team
+	Teams.update(winningBid.team, {$push: {roster: rosterEntry}});
+	// increment the won player total for the team in the tier
+	Tiers.update({
+		_id: tierId,
+		"submissions.team": winningBid.team
+	},
+	{$inc: {'submissions.$.playersWon': 1}});
+	Tiers.update(tierId, {$push: {winningBids: winningBid}});
 }
 
 function calculateTierWinners(tierId) {
@@ -109,10 +112,14 @@ Meteor.methods({
 		if (tier && tier.active && team && !bidSubmitted) {
 			// create bid objects for players
 			_.each(bids, function (bid) {
+				var bidInt = parseInt(bid.bid, 10);
+				if (!bidInt) {
+					bidInt = 0;
+				}
 				var data = {
 					team: team._id,
 					player: bid.player_id,
-					bid: parseInt(bid.bid, 10)
+					bid: bidInt
 				};
 				Bids.insert(data);
 			});

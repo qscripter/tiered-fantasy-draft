@@ -1,13 +1,13 @@
 <template name="myTeamSidebar">
 	<div class="col-md-3">
-		<h3>My Team</h3>
+		<h3>{{ team.name }}</h3>
 		<div class="table-responsive">
 			<table class="table">
 				<thead>
 					<tr>
 						<th>Player</th>
 						<th></th>
-						<th>Bye</th>
+						<th><div class="text-center">Bye</div></th>
 						<th>$$</th>
 					</tr>
 				</thead>
@@ -16,7 +16,7 @@
 						<tr>
 							<td>{{ player.name }}</td>
 							<td>{{ player.position }}</td>
-							<td>{{ player.bye }}</td>
+							<td><div class="text-center">{{ player.bye }}</div></td>
 							<td>${{ salary }}</td>
 						</tr>
 					{{/each }}
@@ -27,6 +27,14 @@
 							</div>
 						</td>
 						<td>${{ totalSalary }}</td>
+					</tr>
+					<tr>
+						<td colspan="3">
+							<div class="pull-right">
+								Maximum Bid:
+							</div>
+						</td>
+						<td>${{ maxBid }}</td>
 					</tr>
 				</tbody>
 			</table>
