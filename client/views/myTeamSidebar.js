@@ -18,6 +18,10 @@ Template.myTeamSidebar.teams = function () {
 	return Teams.find();
 };
 
+Template.myTeamSidebar.owner = function () {
+	return this.owner == Meteor.userId();
+};
+
 Template.myTeamSidebar.player = function () {
 	return Players.findOne(this.player_id);
 };
