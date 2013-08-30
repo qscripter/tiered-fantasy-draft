@@ -1,3 +1,36 @@
+function findMaxBid () {
+	var myTeam = Teams.findOne({owner: Meteor.userId()});
+	if (myTeam) {
+		var salary = _.reduce(myTeam.roster, function (memo, roster) {
+			return memo + roster.salary;
+		}, 0);
+		// minimum players needed
+		return 100 - salary - (17 - myTeam.roster.length) * 2;
+	}
+}
+
+function validateTotalBids () {
+	var bids = _.map($('.bid'), function(bid) {
+		return parseInt($(bid).val(), 10);
+	});
+	var playersToTake = $('#playersToTake').val();
+	bids = _.sortBy(bids, function(num) {
+		return -num;
+	});
+	var totalBids = _.reduce(bids.slice(0, playersToTake), function(memo, num) {
+		return memo + num;
+	}, 0);
+	if (totalBids) {
+		return Session.set("bidsValid", (findMaxBid() - totalBids) >= 0);
+	} else {
+		return true; // covers all blank NaN case
+	}
+}
+
+Template.tierDetail.bidsValid = function () {
+	return Session.get("bidsValid");
+};
+
 Template.tierDetail.tier = function () {
 	return Tiers.findOne(Session.get("selectedTier"));
 };
@@ -48,6 +81,10 @@ Template.tierDetail.rendered = function () {
 	//$('.tt-query').css('background-color','#fff');
 };
 
+Template.tierDetail.created = function () {
+	Session.set("bidsValid", true);
+};
+
 Template.tierDetail.events({
 	'click #addPlayer': function (event) {
 		var playerName = $("#playerName").val();
@@ -68,5 +105,11 @@ Template.tierDetail.events({
 			bids.push(bid);
 		}
 		Meteor.call("submitBids", Session.get("selectedTier"), playersToTake, bids);
+	},
+	'keyup .bid' : function (event) {
+		validateTotalBids();
+	},
+	'change #playersToTake': function (event) {
+		validateTotalBids();
 	}
 });

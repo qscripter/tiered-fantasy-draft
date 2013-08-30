@@ -1,3 +1,31 @@
+function findMaxValidBid (team) {
+	var salary = _.reduce(team.roster, function (memo, roster) {
+		return memo + roster.salary;
+	}, 0);
+	// minimum players needed
+	return 100 - salary - (17 - team.roster.length) * 2;
+}
+
+function findMaxEffectiveBid(maxPlayers, bids) {
+	var numericalBids = _.map(bids, function(bid) {
+		var num = parseInt(bid.bid, 10);
+		if (num) {
+			return num;
+		} else {
+			return 0;
+		}
+	});
+
+	var sortedBids = _.sortBy(numericalBids, function(num) {
+		return -num;
+	});
+
+	var maxTotalBid = _.reduce(sortedBids.slice(0,maxPlayers), function(memo, num) {
+		return memo + num;
+	}, 0);
+	return maxTotalBid;
+}
+
 function calculateWinningBid(tierId, playerId) {
 	var tier,
 		submissionsInContention,
@@ -111,27 +139,30 @@ Meteor.methods({
 			return submission.team == team._id;
 		});
 		if (tier && tier.active && team && !bidSubmitted) {
-			// create bid objects for players
-			_.each(bids, function (bid) {
-				var bidInt = parseInt(bid.bid, 10);
-				if (!bidInt) {
-					bidInt = 0;
-				}
-				var data = {
+			// check if bid is valid ie below the maximum allowable
+			if (findMaxValidBid(team) >= findMaxEffectiveBid(maxPlayers, bids)) {
+				// create bid objects for players
+				_.each(bids, function (bid) {
+					var bidInt = parseInt(bid.bid, 10);
+					if (!bidInt) {
+						bidInt = 0;
+					}
+					var data = {
+						team: team._id,
+						player: bid.player_id,
+						bid: bidInt
+					};
+					Bids.insert(data);
+				});
+				// mark player bids as submitted within the Tier
+				var submission = {
 					team: team._id,
-					player: bid.player_id,
-					bid: bidInt
+					maxPlayers: maxPlayers,
+					playersWon: 0
 				};
-				Bids.insert(data);
-			});
-			// mark player bids as submitted within the Tier
-			var submission = {
-				team: team._id,
-				maxPlayers: maxPlayers,
-				playersWon: 0
-			};
-			Tiers.update(tierId, {$push: {submissions: submission}});
-			calculateTierWinners(tierId);
+				Tiers.update(tierId, {$push: {submissions: submission}});
+				calculateTierWinners(tierId);
+			}
 		}
 	},
 	deleteTeam: function (teamId) {

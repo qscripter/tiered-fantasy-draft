@@ -44,7 +44,7 @@
 									{{#if bidSubmitted }}
 										<div class="pull-right">${{ playerBid.bid }}</div>
 									{{ else }}
-										<div class="pull-right"><input type="text" class="form-control bid" id="{{_id}}"></div><div class="pull-right">$</div>
+										<div class="pull-right form-group"><input type="text" class="form-control bid" id="{{_id}}"></div><div class="pull-right">$</div>
 									{{/if }}
 								</td>
 								{{#if isInRole 'admin' }}
@@ -59,6 +59,11 @@
 				{{#if bidSubmitted }}
 					<div class="text-center"><h4>Waiting for other teams . . .</h4></div>
 				{{ else }}
+					{{#if bidsValid }}
+						<div class="alert">&nbsp;</div>
+					{{ else }}
+						<div class="alert alert-danger"><strong>Bids Invalid</strong> Your bid totals are too high!</div>
+					{{/if }}
 					<div class="pull-left">
 						Max number of players to take
 						<select id="playersToTake" class="form-control">
@@ -67,7 +72,9 @@
 							{{/each }}
 						</select>
 					</div>
-					<div class="pull-right"><a id="submitBids" class="btn btn-lg btn-primary">Submit Bids</a></div>
+					{{#if bidsValid }}
+						<div class="pull-right"><a id="submitBids" class="btn btn-lg btn-primary">Submit Bids</a></div>
+					{{/if }}
 				{{/if }}
 			{{ else }}
 				<div class="text-center"><h4>Please wait for this tier to become active before submitting bids.</h4></div>
