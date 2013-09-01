@@ -17,5 +17,6 @@ TODO
 ====
 
 - add an indicator when players in a tier are already on someone's team
+- investigate what happens when there is a no-bid on a player
 - add a "contract" collection to store data of what contracts players are on
 - improve tie breaking
