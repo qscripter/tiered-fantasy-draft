@@ -16,6 +16,6 @@ To develop install meteor/meteorite and run "mrt" from the command line.
 TODO
 ====
 
+- add an indicator when players in a tier are already on someone's team
 - add a "contract" collection to store data of what contracts players are on
-- enforce maximum bids when putting dollar values into bids
 - improve tie breaking
