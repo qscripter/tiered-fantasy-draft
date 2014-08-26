@@ -10,10 +10,12 @@ Template.teamsSidebar.bidSubmitted = function () {
 			return submission.team == team._id;
 		});
 	}
+	return null;
 };
 
 Template.teamsSidebar.salaryCommitted = function () {
 	return _.reduce(this.roster, function (memo, roster){
 		return memo + roster.salary;
 	}, 0);
+	return null;
 };

@@ -32,7 +32,11 @@
 								<td>
 									<div class="text-center">
 										{{#if isInRole 'admin'}}
-											<input type="radio" class="activeRadio" name="activeRadios" {{#if active}}checked{{/if }}>
+											{{#if active }}
+												<input type="radio" class="activeRadio" name="activeRadios" checked>
+											{{ else }}
+												<input type="radio" class="activeRadio" name="activeRadios">
+											{{/if }}
 										{{ else }}
 											{{#if active }}
 												<div class="text-center"><span class="glyphicon glyphicon-ok"></span></div>

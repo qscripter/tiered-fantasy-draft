@@ -9,9 +9,10 @@ function getPositionPlayers (position) {
 	}
 }
 
+
 Template.myTeamSidebar.team = function () {
 	var myTeam = Teams.findOne(Session.get("selectedSidebarTeam"));
-	return myTeam;
+	return myTeam || null;
 };
 
 Template.myTeamSidebar.teams = function () {
@@ -34,6 +35,7 @@ Template.myTeamSidebar.totalSalary = function () {
 		}, 0);
 		return salary;
 	}
+	return null;
 };
 
 Template.myTeamSidebar.maxBid = function () {
@@ -45,15 +47,18 @@ Template.myTeamSidebar.maxBid = function () {
 		// minimum players needed
 		return 100 - salary - (17 - myTeam.roster.length) * 2;
 	}
+	return null;
 };
 
 Template.myTeamSidebar.league = function () {
-	return Leagues.findOne();
+	return Leagues.findOne() || null;
 };
+
 
 Template.myTeamSidebar.getPositionPlayers = function (position) {
 	return getPositionPlayers(position);
 };
+
 
 Template.myTeamSidebar.remainingSlots = function (position) {
 	var players = getPositionPlayers(position);
@@ -62,9 +67,17 @@ Template.myTeamSidebar.remainingSlots = function (position) {
 		var requiredPlayers = _.filter(league.positions, function (item) {
 			return item.position == position;
 		})[0].required;
-		return requiredPlayers - players.count();
+		var positions = []
+		var i=0;
+		while (i<(requiredPlayers - players.count())) {
+			positions[i] = position;
+			i++;
+		}
+		return positions;
 	}
+	return null;
 };
+
 
 Template.myTeamSidebar.getSalary = function (playerId) {
 	var myTeam = Teams.findOne(Session.get("selectedSidebarTeam"));
@@ -73,6 +86,7 @@ Template.myTeamSidebar.getSalary = function (playerId) {
 			return roster.player_id == playerId;
 		}).salary;
 	}
+	return null;
 };
 
 Template.myTeamSidebar.playersNeeded = function () {
@@ -81,6 +95,7 @@ Template.myTeamSidebar.playersNeeded = function () {
 	if (league && myTeam) {
 		return league.minRosterSize - myTeam.roster.length;
 	}
+	return null;
 };
 
 Template.myTeamSidebar.events({

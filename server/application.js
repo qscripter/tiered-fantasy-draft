@@ -1,11 +1,14 @@
 Meteor.startup(function () {
+	//Players.remove({});
 	if (Players.find().fetch().length === 0) {
 		for (var i=0; i<nfl_players.length; i++) {
 			Players.insert(nfl_players[i]);
 		}
 	}
-	var qscripterId = Meteor.users.findOne({"emails.0.address": "qscripter@gmail.com"})._id;
-	Roles.addUsersToRoles(qscripterId, ['admin']);
+	var qscripter = Meteor.users.findOne({"emails.0.address": "qscripter@gmail.com"});
+	if (qscripter) {
+		Roles.addUsersToRoles(qscripter._id, ['admin']);
+	}
 	//Tiers.remove({}, {multi: true});
 
 	if (Leagues.find().count() === 0) {

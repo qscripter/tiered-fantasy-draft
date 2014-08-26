@@ -1,5 +1,7 @@
-router
-page-js-ie-support
-HTML5-History-API
-accounts-ui-bootstrap-dropdown
-roles
+/roles
+/iron-router
+/iron-layout
+/blaze-layout
+/iron-core
+/iron-dynamic-template
+/accounts-ui-bootstrap-3

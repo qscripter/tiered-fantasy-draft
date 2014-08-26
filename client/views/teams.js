@@ -40,5 +40,17 @@ Template.teams.events({
 	'change .ownerSelect': function (event) {
 		var email = $(event.target).val();
 		Meteor.call("setTeamOwner", this._id, email);
+	},
+	'keydown #teamName': function (event) {
+		if (event.keyCode == 13) {
+			var teamName = $('#teamName').val();
+			data = {
+				name: teamName,
+				roster: []
+			};
+			Teams.insert(data);
+			$('#teamName').val("");
+			event.preventDefault();
+		}
 	}
 });

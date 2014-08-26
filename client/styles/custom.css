@@ -138,3 +138,13 @@
 .tt-suggestion p {
   margin: 0;
 }
+
+.loading {
+  text-align: center;
+  padding-top: 200px;
+}
+
+.login-wrapper {
+  float: right;
+  padding: 15px 5px 15px 5px;
+}

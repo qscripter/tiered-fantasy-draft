@@ -1,4 +1,4 @@
-nfl_players = [
+nfl_players_old = [
 {name:"Adrian Peterson",team:"MIN",bye:5,position:"RB",age:28},
 {name:"Doug Martin",team:"TB",bye:5,position:"RB",age:24},
 {name:"Marshawn Lynch",team:"SEA",bye:12,position:"RB",age:27},

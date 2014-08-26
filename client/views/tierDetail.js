@@ -43,6 +43,8 @@ Template.tierDetail.players = function () {
 			players.push(Players.findOne(tier.players[i]));
 		}
 		return players;
+	} else {
+		return null;
 	}
 };
 
@@ -58,6 +60,8 @@ Template.tierDetail.bidSubmitted = function () {
 		return _.find(tier.submissions, function (submission) {
 			return submission.team == team._id;
 		});
+	} else {
+		return null;
 	}
 };
 
@@ -65,19 +69,26 @@ Template.tierDetail.playerBid = function () {
 	return Bids.findOne({player: this._id});
 };
 
-function initTypeahead (players) {
-	$('#playerName').typeahead({
-		name: 'playerName',
-		valueKey: 'name',
-		local: players
-	});
-}
 
 Template.tierDetail.rendered = function () {
 	var players = Players.find().fetch();
-	if (players.length > 0) {
-		initTypeahead(players);
-	}
+	var playersBloodhound = new Bloodhound({
+		datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
+		queryTokenizer: Bloodhound.tokenizers.whitespace,
+		local: players
+	});
+	playersBloodhound.initialize();
+
+	$('#playerName').typeahead({
+		hint: true,
+		highlight: true,
+		minLength: 1
+	},
+	{
+		name: 'playerName',
+		displayKey: 'name',
+		source: playersBloodhound.ttAdapter()
+	});
 	//$('.tt-query').css('background-color','#fff');
 };
 
@@ -89,6 +100,13 @@ Template.tierDetail.events({
 	'click #addPlayer': function (event) {
 		var playerName = $("#playerName").val();
 		Meteor.call("addPlayerToTier", playerName, Session.get("selectedTier"));
+	},
+	'keydown #playerName': function (event) {
+		if (event.keyCode == 13) {
+			var playerName = $("#playerName").val();
+			Meteor.call("addPlayerToTier", playerName, Session.get("selectedTier"));
+			$("#playerName").val("");
+		};
 	},
 	'click .deletePlayer': function (event) {
 		Meteor.call("removePlayerFromTier", this._id, Session.get("selectedTier"));

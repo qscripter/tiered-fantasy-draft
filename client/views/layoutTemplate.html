@@ -1,0 +1,31 @@
+<template name="layoutTemplate">
+	<div class="navbar navbar-inverse navbar-fixed-top">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="/">Real Fantasy Football</a>
+			</div>
+			<div class="collapse navbar-collapse">
+				{{#if currentUser }}
+				<ul class="nav navbar-nav">
+					<li><a href="/tiers">Tiers</a></li>
+					<li><a href="/teams">Teams</a></li>
+				</ul>
+				{{/if }}
+				<div class="nav navbar-nav navbar-right">
+					{{> loginButtons }}
+				</div>
+			</div><!--/.nav-collapse -->
+		</div>
+    </div>
+
+    <div class="container">
+
+      {{> yield }}
+
+    </div><!-- /.container -->
+</template>

@@ -33,7 +33,11 @@
 										<select class="form-control ownerSelect">
 											<option></option>
 											{{#each users }}
-												<option id={{ _id }} {{#if owner ../_id }}selected{{/if}}>{{ email }}</option>
+												{{#if owner ../_id }}
+													<option id={{ _id }} selected>{{ email }}</option>
+												{{ else }}
+													<option id={{ _id }}>{{ email }}</option>
+												{{/if}}
 											{{/each }}
 										</select>
 									{{ else }}

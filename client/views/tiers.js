@@ -19,5 +19,19 @@ Template.tiers.events({
 	},
 	'click .deleteTier': function (event) {
 		Meteor.call("deleteTier", this._id);
+	},
+	'keydown #tierName': function (event) {
+		if (event.keyCode == 13) {
+			var tierName = $('#tierName').val();
+			data = {
+				name: tierName,
+				players: [],
+				bids: [],
+				submissions: []
+			};
+			Tiers.insert(data);
+			$('#tierName').val("");
+			event.preventDefault();
+		}
 	}
 });
