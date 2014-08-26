@@ -30,19 +30,23 @@ Template.myTeamSidebar.player = function () {
 Template.myTeamSidebar.totalSalary = function () {
 	var myTeam = Teams.findOne(Session.get("selectedSidebarTeam"));
 	if (myTeam) {
-		var salary = _.reduce(myTeam.roster, function (memo, roster) {
-			return memo + roster.salary;
+		return _.reduce(myTeam.roster, function (memo, contract){
+			var salaryYear = _.find(contract.salaryAllocation, function (allocation){
+				return allocation.year == contract.currentYear
+			});
+			return memo + salaryYear.salary + salaryYear.bonus;
 		}, 0);
-		return salary;
 	}
-	return null;
 };
 
 Template.myTeamSidebar.maxBid = function () {
 	var myTeam = Teams.findOne(Session.get("selectedSidebarTeam"));
 	if (myTeam) {
-		var salary = _.reduce(myTeam.roster, function (memo, roster) {
-			return memo + roster.salary;
+		var salary = _.reduce(myTeam.roster, function (memo, contract){
+			var salaryYear = _.find(contract.salaryAllocation, function (allocation){
+				return allocation.year == contract.currentYear
+			});
+			return memo + salaryYear.salary + salaryYear.bonus;
 		}, 0);
 		// minimum players needed
 		return 100 - salary - (17 - myTeam.roster.length) * 2;
@@ -82,9 +86,13 @@ Template.myTeamSidebar.remainingSlots = function (position) {
 Template.myTeamSidebar.getSalary = function (playerId) {
 	var myTeam = Teams.findOne(Session.get("selectedSidebarTeam"));
 	if (myTeam) {
-		return _.find(myTeam.roster, function (roster) {
+		var contract = _.find(myTeam.roster, function (roster) {
 			return roster.player_id == playerId;
-		}).salary;
+		});
+		var currentSalary = _.find(contract.salaryAllocation, function(salaryYear) {
+			return salaryYear.year == contract.currentYear;
+		});
+		return currentSalary.bonus + currentSalary.salary;
 	}
 	return null;
 };

@@ -1,8 +1,11 @@
 function findMaxBid () {
 	var myTeam = Teams.findOne({owner: Meteor.userId()});
 	if (myTeam) {
-		var salary = _.reduce(myTeam.roster, function (memo, roster) {
-			return memo + roster.salary;
+		var salary = _.reduce(myTeam.roster, function (memo, contract){
+			var salaryYear = _.find(contract.salaryAllocation, function (allocation){
+				return allocation.year == contract.currentYear
+			});
+			return memo + salaryYear.salary + salaryYear.bonus;
 		}, 0);
 		// minimum players needed
 		return 100 - salary - (17 - myTeam.roster.length) * 2;

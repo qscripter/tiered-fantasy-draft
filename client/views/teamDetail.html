@@ -1,6 +1,6 @@
 <template name="teamDetail">
 	<div class="row">
-		<div class="col-md-8 col-md-offset-2">
+		<div class="col-md-12">
 			<div class="pull-left">
 				<h2>{{ team.name }}</h2>
 			</div>
@@ -17,17 +17,67 @@
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-md-8 col-md-offset-2">
+		<div class="col-md-6">
+			<h3>Total Contract Allocations</h3>
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Year</th>
+						<th>Bonus</th>
+						<th>Salary</th>
+						<th>Total</th>
+						<th>Remaining</th>
+					</tr>
+				</thead>
+				<tbody>
+					{{#each contractTotals}}
+					<tr>
+						<td>Current + {{ index }}</td>
+						<td>{{ bonus }}</td>
+						<td>{{ salary }}</td>
+						<td>{{ total }}</td>
+						<td>{{ remaining }}</td>
+					</tr>
+					{{/each }}
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<h3>Current Contracts</h3>
 			<div class="table-responsive">
-				<table class="table">
+				<table class="table text-center">
 					<thead>
 						<tr>
-							<th>Player</th>
+							<th></th>
+							<th></th>
+							<th></th>
+							<th></th>
+							<th></th>
+							<th></th>
+							<th></th>
+							<th></th>
+							<th><div class="text-center">Contract Allocation</div></th>
+							{{#if isInRole 'admin' }}
+							<th></th>
+							{{/if }}
+						</tr>
+						<tr>
+							<th><div class="text-left">Player</div></th>
 							<th><div class="text-center">Team</div></th>
 							<th><div class="text-center">Bye</div></th>
 							<th><div class="text-center">Pos</div></th>
-							<th>$$</th>
-							<th><div class="text-center">Contract Years</div></th>
+							<th><div class="text-center callout" data-toggle="tooltip" data-placement="top" title="Bid Value">Bid</div></th>
+							<th><div class="text-center callout" data-toggle="tooltip" data-placement="top" title="Total Contract Value">TV</div></th>
+							<th><div class="text-center callout" data-toggle="tooltip" data-placement="top" title="Total Contract Years">TY</div></th>
+							<th><div class="text-center callout" data-toggle="tooltip" data-placement="top" title="Current Contract Year">CY</div></th>
+							<th>
+								<div class="fake-column">Year</div>
+								<div class="fake-column">Bonus</div>
+								<div class="fake-column">Salary</div>
+							</th>
+							<th></th>
 							{{#if isInRole 'admin' }}
 							<th></th>
 							{{/if }}
@@ -36,24 +86,86 @@
 					<tbody>
 						{{#each team.roster}}
 							<tr>
-								<td>{{ player.name }}</td>
-								<td><div class="text-center">{{ player.team }}</div></td>
-								<td><div class="text-center">{{ player.bye }}</div></td>
-								<td><div class="text-center">{{ player.position }}</div></td>
-								<td class="salary">
-									{{#if salaryEdit }}
-										<input type="text" class="form-control salaryInput" value="{{ salary}}">
+								<td><div class="text-left">{{ player.name }}</div></td>
+								<td>{{ player.team }}</td>
+								<td>{{ player.bye }}</td>
+								<td><span class="position {{player.position}}">{{ player.position }}</span></td>
+								<td class="bid">
+									{{#if bidEdit }}
+										<input type="text" class="form-control bidInput" value="{{ bid }}">
 									{{ else }}
-										${{ salary }}
+										${{ bid }}
 									{{/if }}
 								</td>
-								<td class="contract">
+								<td>${{ contractValue }}</td>
+								<td>
+									{{#if contractYearsEditable }}
+										<select class="form-control contract-years">
+											{{#each availableContractYears }}
+												{{#if selected }}
+												<option selected>{{ year }}</option>
+												{{ else }}
+												<option>{{ year }}</option>
+												{{/if }}
+											{{/each }}
+										</select>
+									{{ else }}
+										{{ contractYears }}
+									{{/if }}
+								</td>
+								<td>
+									{{#if currentYearEdit }}
+										<input id="current-year-edit" class="form-control" type="text" value="{{ currentYear }}">
+									{{ else }}
+										<div class="current-year">{{ currentYear }}</div>
+									{{/if }}
+								</td>
+								<td>
+									{{#each salaryAllocation }}
+										{{#if salaryEdit .. }}
+											<div>
+												<div class="fake-column">{{ year }}</div>
+												{{#if yearEditable .. }}
+												<div class="fake-column">
+													<input id="{{ ../player_id}}-year-{{ year }}-bonus" class="form-control bonus-input" type="text" value="{{ bonus }}">
+												</div>
+												<div class="fake-column">
+													<input id="{{ ../player_id}}-year-{{ year }}-salary" class="form-control salary-input" type="text" value="{{ salary }}">
+												</div>
+												{{ else }}
+												<div class="fake-column">
+													<input id="{{ ../player_id}}-year-{{ year }}-bonus" class="form-control bonus-input" type="text" value="{{ bonus }}" disabled="true">
+												</div>
+												<div class="fake-column">
+													<input id="{{ ../player_id}}-year-{{ year }}-salary" class="form-control salary-input" type="text" value="{{ salary }}" disabled="true">
+												</div>
+												{{/if }}
+											</div>
+										{{ else }}
+											<div>
+												<div class="fake-column">{{ year }}</div>
+												<div class="fake-column">{{ bonus }}</div>
+												<div class="fake-column">{{ salary }}</div>
+											</div>
+										{{/if }}
+									{{/each }}
+									<div>
+										<div class="fake-column callout" data-toggle="tooltip" data-placement="left" title="Total"><strong>T</strong></div>
+										<div class="fake-column"><strong>{{ bonusTotal }}</strong></div>
+										<div class="fake-column"><strong>{{ salaryTotal }}</strong></div>
+									</div>
+								</td>
+								{{#if contractEditable }}
+								<td>
 									{{#if contractEdit }}
-										<input type="text" class="form-control contractInput" value="{{ contractYears }}">
+										<button class="btn save-contract">Save</button>
 									{{ else }}
-										<div class="text-center">{{ contractYears }}</div>
+										<button class="btn edit-years">Edit</button>
 									{{/if }}
 								</td>
+								{{ else }}
+								<td></td>
+								{{/if }}
 								{{#if isInRole 'admin' }}
 									<td><span class="glyphicon glyphicon-trash deletePlayer"></span></td>
 								{{/if }}

@@ -14,8 +14,11 @@ Template.teamsSidebar.bidSubmitted = function () {
 };
 
 Template.teamsSidebar.salaryCommitted = function () {
-	return _.reduce(this.roster, function (memo, roster){
-		return memo + roster.salary;
+	return _.reduce(this.roster, function (memo, contract){
+		var salaryYear = _.find(contract.salaryAllocation, function (allocation){
+			return allocation.year == contract.currentYear
+		});
+		return memo + salaryYear.salary + salaryYear.bonus;
 	}, 0);
 	return null;
 };

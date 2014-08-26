@@ -148,3 +148,13 @@
   float: right;
   padding: 15px 5px 15px 5px;
 }
+
+.fake-column {
+  width: 33%;
+  float: left;
+  text-align: center;
+}
+
+.text-left {
+  text-align: left;
+}

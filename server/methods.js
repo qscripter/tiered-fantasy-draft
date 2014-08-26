@@ -1,6 +1,9 @@
 function findMaxValidBid (team) {
-	var salary = _.reduce(team.roster, function (memo, roster) {
-		return memo + roster.salary;
+	var salary = _.reduce(team.roster, function (memo, contract){
+		var salaryYear = _.find(contract.salaryAllocation, function (allocation){
+			return allocation.year == contract.currentYear
+		});
+		return memo + salaryYear.salary + salaryYear.bonus;
 	}, 0);
 	// minimum players needed
 	return 100 - salary - (17 - team.roster.length) * 2;
@@ -59,42 +62,51 @@ function calculateWinningBid(tierId, playerId) {
 		i++;
 	}
 
-	// case where there is one maximum bidder
-	if (winningBids.length == 1) {
-		winningTeam = winningBids[0].team;
-		// determine winning salary
-		if (bids.length == 1) {
-			// only one remaining bidder
-			winningSalary = 2; // minimum salary
-		} else {
-			winningSalary = bids[1].bid + 1; // next lowest salary + 1
+	if (winningBids.length > 0) { // there must be at least one winner
+		// case where there is one maximum bidder
+		if (winningBids.length == 1) {
+			winningTeam = winningBids[0].team;
+			// determine winning salary
+			if (bids.length == 1) {
+				// only one remaining bidder
+				winningSalary = 2; // minimum salary
+			} else {
+				winningSalary = bids[1].bid + 1; // next lowest salary + 1
+			}
+		} else {  // case for a tie
+			winningTeam = _.shuffle(winningBids)[0].team; // shuffle the winning bids and take 0 index, ie randomly select the winning team
+			winningSalary = winningBids[0].bid;
 		}
-	} else {  // case for a tie
-		winningTeam = _.shuffle(winningBids)[0].team; // shuffle the winning bids and take 0 index, ie randomly select the winning team
-		winningSalary = winningBids[0].bid;
+
+		winningBid = {
+			player: playerId,
+			team: winningTeam,
+			salary: winningSalary
+		};
+
+		// add player to winning team
+		bonus = Math.ceil(winningSalary / 2);
+		salary = winningSalary - bonus;
+		rosterEntry = {
+			player_id: playerId,
+			bid: winningSalary,
+			contractYears: 1,
+			currentYear: 1,
+			salaryAllocation: [
+				{year: 1, salary: salary, bonus: bonus}
+			],
+			rookie: false
+		};
+		// add player to team
+		Teams.update(winningBid.team, {$push: {roster: rosterEntry}});
+		// increment the won player total for the team in the tier
+		Tiers.update({
+			_id: tierId,
+			"submissions.team": winningBid.team
+		},
+		{$inc: {'submissions.$.playersWon': 1}});
+		Tiers.update(tierId, {$push: {winningBids: winningBid}});
 	}
-
-	winningBid = {
-		player: playerId,
-		team: winningTeam,
-		salary: winningSalary
-	};
-
-	// add player to winning team
-	rosterEntry = {
-		player_id: playerId,
-		salary: winningSalary,
-		contractYears: 1
-	};
-	// add player to team
-	Teams.update(winningBid.team, {$push: {roster: rosterEntry}});
-	// increment the won player total for the team in the tier
-	Tiers.update({
-		_id: tierId,
-		"submissions.team": winningBid.team
-	},
-	{$inc: {'submissions.$.playersWon': 1}});
-	Tiers.update(tierId, {$push: {winningBids: winningBid}});
 }
 
 function calculateTierWinners(tierId) {
@@ -111,25 +123,107 @@ function calculateTierWinners(tierId) {
 
 
 Meteor.methods({
-	updatePlayerSalary: function (teamId, playerId, salary) {
+	updatePlayerBid: function (teamId, playerId, bid) {
 		if (Roles.userIsInRole(this.userId, ['admin'])) {
-			salary = parseInt(salary, 10);
+			bid = parseInt(bid, 10);
+			var bonus = Math.ceil(bid / 2);
+			var salary = bid - bonus;
+			var contract = Teams.find({
+				_id: teamId,
+				"roster.player_id": playerId
+			}).fetch()[0].roster[0];
 			Teams.update({
 				_id: teamId,
 				"roster.player_id": playerId
 			},
-			{$set: {'roster.$.salary': salary}});
+			{$set: {
+				'roster.$.bid': bid,
+				'roster.$.salaryAllocation.0.bonus': bonus,
+				'roster.$.salaryAllocation.0.salary': salary
+			}});
+			
+
 		}
 	},
 	updatePlayerContract: function (teamId, playerId, contractYears) {
-		if (Roles.userIsInRole(this.userId, ['admin'])) {
+		// update permissions here, allow owners to update contracts for their players if in first contract year
+		var team = Teams.findOne(teamId);
+		var contract = _.find(team.roster, function(contract) {
+			return contract.player_id == playerId;
+		});
+		if (Roles.userIsInRole(this.userId, ['admin']) || (team.owner == this.userId && contract.currentYear == 1)) {
+			var bid, bonus, salary, salaryAllocation, i, roster;
 			contractYears = parseInt(contractYears, 10);
+
 			Teams.update({
 				_id: teamId,
 				"roster.player_id": playerId
 			},
 			{$set: {'roster.$.contractYears': contractYears}});
+
+			// update for other contract years
+			roster = team.roster;
+			bid = contract.bid;
+			bonus = Math.ceil(bid / 2);
+			salary = bid - bonus;
+			salaryAllocation = [];
+			i = 0;
+			while(i<contractYears) {
+				salaryAllocation.push({
+					year: i+1,
+					bonus: bonus,
+					salary: salary,
+				})
+				i++;
+			}
+			Teams.update({
+				_id: teamId,
+				"roster.player_id": playerId
+			},
+			{$set: {'roster.$.salaryAllocation': salaryAllocation}});
+
+
 		}
+	},
+	updateCurrentYear: function (teamId, playerId, currentYear) {
+		currentYear = parseInt(currentYear, 10);
+		if (currentYear > 0 && currentYear < 5) {
+			Teams.update({
+				_id: teamId,
+				"roster.player_id": playerId
+			},
+			{$set: {'roster.$.currentYear': currentYear}});
+		}
+	},
+	updateSalaryAllocation: function (teamId, playerId, salaryAllocation) {
+		//validate salaryAllocation
+		// all salaries must be >0, sum of salaries must add up, sum of bonus must add up
+		var team = Teams.findOne(teamId);
+		if (Roles.userIsInRole(this.userId, ['admin']) || team.owner == this.userId) {
+			var roster = Teams.find({
+				_id: teamId,
+				"roster.player_id": playerId
+			}).fetch()[0].roster;
+			var team = Teams.findOne(teamId);
+			var maxBid = findMaxValidBid(team);
+			var contract = _.find(roster, function(contract) {return contract.player_id == playerId});
+			var bonusTotal = Math.ceil(contract.bid / 2 ) * contract.contractYears;
+			var salaryTotal = contract.bid * contract.contractYears - bonusTotal;
+			var salaryGreaterThanOne = true;
+			var underCap = salaryAllocation[0].bonus + salaryAllocation[0].salary < maxBid;
+			for (var i=0; i < salaryAllocation.length; i++) {
+				salaryGreaterThanOne == salaryGreaterThanOne && salaryAllocation[i].salary > 0;
+				salaryTotal = salaryTotal - salaryAllocation[i].salary;
+				bonusTotal = bonusTotal - salaryAllocation[i].bonus;
+			}
+			if (salaryGreaterThanOne && salaryTotal == 0 && bonusTotal == 0 && salaryAllocation.length == contract.contractYears && underCap) {
+				Teams.update({
+					_id: teamId,
+					"roster.player_id": playerId
+				},
+				{$set: {'roster.$.salaryAllocation': salaryAllocation}});
+			}
+		};
 	},
 	submitBids: function (tierId, maxPlayers, bids) {
 		// make sure the bids are being entered for the active round
