@@ -18,6 +18,16 @@ Template.teamDetail.contractValue = function () {
 	return this.bid * this.contractYears;
 }
 
+Template.teamDetail.contractYearClass= function (parent) {
+	if (parent.currentYear > this.year) {
+		return "past-contract-year";
+	} else if (parent.currentYear == this.year) {
+		return "current-contract-year";
+	} else {
+		return "future-contract-year";
+	}
+}
+
 Template.teamDetail.contractYearsEditable = function () {
 	team = Teams.findOne(Session.get("selectedTeam"));
 	if (team) {
@@ -63,11 +73,11 @@ Template.teamDetail.availableContractYears = function () {
 }
 
 Template.teamDetail.bonusTotal = function() {
-	return Math.ceil(this.bid / 2) * this.contractYears;
+	return Math.ceil(this.bid * this.contractYears / 2);
 }
 
 Template.teamDetail.salaryTotal = function () {
-	return (this.bid - Math.ceil(this.bid/2)) * this.contractYears;
+	return (this.bid * this.contractYears - Math.ceil(this.bid * this.contractYears/2));
 }
 
 Template.teamDetail.contractTotals = function () {

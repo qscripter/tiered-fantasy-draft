@@ -7,8 +7,6 @@ standard-app-packages
 accounts-base
 accounts-password
 accounts-google
-accounts-twitter
-accounts-github
 roles
 iron-router
 accounts-ui-bootstrap-3

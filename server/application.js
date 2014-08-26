@@ -1,10 +1,5 @@
 Meteor.startup(function () {
-	//Players.remove({});
-	if (Players.find().fetch().length === 0) {
-		for (var i=0; i<nfl_players.length; i++) {
-			Players.insert(nfl_players[i]);
-		}
-	}
+	
 	var qscripter = Meteor.users.findOne({"emails.0.address": "qscripter@gmail.com"});
 	if (qscripter) {
 		Roles.addUsersToRoles(qscripter._id, ['admin']);

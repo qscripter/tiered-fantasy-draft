@@ -158,3 +158,30 @@
 .text-left {
   text-align: left;
 }
+
+.past-contract-year {
+  color: #fff;
+  background-color: #f0ad4e;
+}
+
+.current-contract-year {
+  color: #fff;
+  background-color: #428bca;
+}
+
+.future-contract-year {
+  color: #fff;
+  background-color: #5bc0de;
+}
+
+.current-contract-year-2 {
+  margin-top: 20px;
+}
+
+.current-contract-year-3 {
+  margin-top: 40px;
+}
+
+.current-contract-year-4 {
+  margin-top: 60px;
+}

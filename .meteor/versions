@@ -1,9 +1,7 @@
 accounts-base@1.0.0
-accounts-github@1.0.0
 accounts-google@1.0.0
 accounts-oauth@1.0.0
 accounts-password@1.0.0
-accounts-twitter@1.0.0
 accounts-ui-bootstrap-3@0.0.0
 application-configuration@1.0.0
 autoupdate@1.0.4
@@ -19,7 +17,6 @@ ejson@1.0.0
 email@1.0.2
 follower-livedata@1.0.0
 geojson-utils@1.0.0
-github@1.0.0
 google@1.0.0
 handlebars@1.0.0
 html-tools@1.0.0
@@ -40,7 +37,6 @@ minifiers@1.0.2
 minimongo@1.0.1
 mongo-livedata@1.0.3
 npm-bcrypt@0.7.7
-oauth1@1.0.0
 oauth2@1.0.0
 oauth@1.0.0
 observe-sequence@1.0.1
@@ -60,7 +56,6 @@ srp@1.0.0
 standard-app-packages@1.0.0
 stylus@1.0.3
 templating@1.0.4
-twitter@1.0.0
 ui@1.0.0
 underscore@1.0.0
 webapp@1.0.2

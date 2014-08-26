@@ -207,7 +207,7 @@ Meteor.methods({
 			var team = Teams.findOne(teamId);
 			var maxBid = findMaxValidBid(team);
 			var contract = _.find(roster, function(contract) {return contract.player_id == playerId});
-			var bonusTotal = Math.ceil(contract.bid / 2 ) * contract.contractYears;
+			var bonusTotal = Math.ceil(contract.bid * contract.contractYears / 2 );
 			var salaryTotal = contract.bid * contract.contractYears - bonusTotal;
 			var salaryGreaterThanOne = true;
 			var underCap = salaryAllocation[0].bonus + salaryAllocation[0].salary < maxBid;
@@ -297,6 +297,16 @@ Meteor.methods({
 				Teams.update(teamId, {$set: {owner: user._id}});
 			} else if (email === "") {
 				Teams.update(teamId, {$set: {owner: ""}});
+			}
+		}
+	},
+	resetPlayers: function() {
+		if (Roles.userIsInRole(this.userId, ['admin'])) {
+			Players.remove({});
+			if (Players.find().fetch().length === 0) {
+				for (var i=0; i<nfl_players.length; i++) {
+					Players.insert(nfl_players[i]);
+				}
 			}
 		}
 	}

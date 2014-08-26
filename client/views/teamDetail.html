@@ -117,42 +117,44 @@
 									{{#if currentYearEdit }}
 										<input id="current-year-edit" class="form-control" type="text" value="{{ currentYear }}">
 									{{ else }}
-										<div class="current-year">{{ currentYear }}</div>
+										<div class="current-year current-contract-year current-contract-year-{{ currentYear }}">{{ currentYear }}</div>
 									{{/if }}
 								</td>
 								<td>
-									{{#each salaryAllocation }}
-										{{#if salaryEdit .. }}
-											<div>
-												<div class="fake-column">{{ year }}</div>
-												{{#if yearEditable .. }}
-												<div class="fake-column">
-													<input id="{{ ../player_id}}-year-{{ year }}-bonus" class="form-control bonus-input" type="text" value="{{ bonus }}">
+									<div class="">
+										{{#each salaryAllocation }}
+											{{#if salaryEdit .. }}
+												<div>
+													<div class="fake-column">{{ year }}</div>
+													{{#if yearEditable .. }}
+													<div class="fake-column">
+														<input id="{{ ../player_id}}-year-{{ year }}-bonus" class="form-control bonus-input" type="text" value="{{ bonus }}">
+													</div>
+													<div class="fake-column">
+														<input id="{{ ../player_id}}-year-{{ year }}-salary" class="form-control salary-input" type="text" value="{{ salary }}">
+													</div>
+													{{ else }}
+													<div class="fake-column">
+														<input id="{{ ../player_id}}-year-{{ year }}-bonus" class="form-control bonus-input" type="text" value="{{ bonus }}" disabled="true">
+													</div>
+													<div class="fake-column">
+														<input id="{{ ../player_id}}-year-{{ year }}-salary" class="form-control salary-input" type="text" value="{{ salary }}" disabled="true">
+													</div>
+													{{/if }}
 												</div>
-												<div class="fake-column">
-													<input id="{{ ../player_id}}-year-{{ year }}-salary" class="form-control salary-input" type="text" value="{{ salary }}">
+											{{ else }}
+												<div class="">
+													<div class="fake-column {{ contractYearClass .. }}">{{ year }}</div>
+													<div class="fake-column {{ contractYearClass .. }}">{{ bonus }}</div>
+													<div class="fake-column {{ contractYearClass .. }}">{{ salary }}</div>
 												</div>
-												{{ else }}
-												<div class="fake-column">
-													<input id="{{ ../player_id}}-year-{{ year }}-bonus" class="form-control bonus-input" type="text" value="{{ bonus }}" disabled="true">
-												</div>
-												<div class="fake-column">
-													<input id="{{ ../player_id}}-year-{{ year }}-salary" class="form-control salary-input" type="text" value="{{ salary }}" disabled="true">
-												</div>
-												{{/if }}
-											</div>
-										{{ else }}
-											<div>
-												<div class="fake-column">{{ year }}</div>
-												<div class="fake-column">{{ bonus }}</div>
-												<div class="fake-column">{{ salary }}</div>
-											</div>
-										{{/if }}
-									{{/each }}
-									<div>
-										<div class="fake-column callout" data-toggle="tooltip" data-placement="left" title="Total"><strong>T</strong></div>
-										<div class="fake-column"><strong>{{ bonusTotal }}</strong></div>
-										<div class="fake-column"><strong>{{ salaryTotal }}</strong></div>
+											{{/if }}
+										{{/each }}
+										<div>
+											<div class="fake-column callout" data-toggle="tooltip" data-placement="left" title="Total"><strong>T</strong></div>
+											<div class="fake-column"><strong>{{ bonusTotal }}</strong></div>
+											<div class="fake-column"><strong>{{ salaryTotal }}</strong></div>
+										</div>
 									</div>
 								</td>
 								{{#if contractEditable }}
