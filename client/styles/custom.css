@@ -185,3 +185,7 @@
 .current-contract-year-4 {
   margin-top: 60px;
 }
+
+.no-border {
+  border-bottom: none;
+}

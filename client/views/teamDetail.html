@@ -2,7 +2,7 @@
 	<div class="row">
 		<div class="col-md-12">
 			<div class="pull-left">
-				<h2>{{ team.name }}</h2>
+				<h1>{{ team.name }}</h1>
 			</div>
 			{{#if isInRole 'admin' }}
 				<div class="pull-right">
@@ -42,6 +42,9 @@
 				</tbody>
 			</table>
 		</div>
+		<div class="col-md-6">
+			{{> positionGraph }}
+		</div>
 	</div>
 	<div class="row">
 		<div class="col-md-12">
@@ -49,7 +52,7 @@
 			<div class="table-responsive">
 				<table class="table text-center">
 					<thead>
-						<tr>
+						<tr class="no-border">
 							<th></th>
 							<th></th>
 							<th></th>
