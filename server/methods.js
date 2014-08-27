@@ -162,18 +162,32 @@ Meteor.methods({
 			{$set: {'roster.$.contractYears': contractYears}});
 
 			// update for other contract years
+			// TODO: this craps out with there are odd bid values
 			roster = team.roster;
 			bid = contract.bid;
-			bonus = Math.ceil(bid / 2);
-			salary = bid - bonus;
+			bonusTotal = Math.ceil(bid *contractYears / 2);
+			salaryTotal = bid * contractYears - bonusTotal;
 			salaryAllocation = [];
 			i = 0;
 			while(i<contractYears) {
+				var bonus, salary;
+				if (bonusTotal > 1 && i<contractYears - 1) {
+					bonus = Math.ceil(bonusTotal / 2);
+				} else {
+					bonus = bonusTotal;
+				}
+				if (salaryTotal > 1 && i<contractYears - 1) {
+					salary = Math.ceil(salaryTotal / 2);
+				} else {
+					salary = salaryTotal;
+				}
 				salaryAllocation.push({
 					year: i+1,
 					bonus: bonus,
 					salary: salary,
 				})
+				bonusTotal -= bonus;
+				salaryTotal -= salary;
 				i++;
 			}
 			Teams.update({

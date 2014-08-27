@@ -60,6 +60,9 @@ Router.map(function() {
 	this.route('teamDetail', {
 		path: '/teams/:_id',
 		template: 'teamDetail',
+		data: function() {
+			return Teams.findOne(this.params._id);
+		},
 		waitOn: function () {
 			Session.set('selectedTeam', this.params._id);
 			return Meteor.subscribe("players");
