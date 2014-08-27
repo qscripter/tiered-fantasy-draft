@@ -78,6 +78,31 @@ Router.map(function() {
 		path: '/teams',
 		template: 'teams',
 	});
+	this.route('myTeam', {
+		path: '/my-team',
+		waitOn: function () {
+			return Meteor.subscribe("teams");
+		},
+		action: function() {
+			if (this.ready()) {
+				var team = Teams.findOne({owner: Meteor.user()._id});
+				this.redirect('/teams/' + team._id);
+			}
+		}
+	});
+	this.route('currentTier', {
+		path: '/current-tier',
+		waitOn: function () {
+			return Meteor.subscribe("tiers");
+		},
+		action: function () {
+			if (this.ready()) {
+				var tier = Tiers.findOne({active: true});
+				Session.set('selectedTier', tier._id);
+				this.render('tierDetail');
+			}
+		}
+	});
 });
 
 // Meteor.Router.filters({
