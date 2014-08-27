@@ -56,11 +56,10 @@ function buildChartData (team, league) {
 		}
 		data.push({
 				value: salaryTotal,
-				color: "#5cb85c",
-				highlight: "#4cae4c",
+				color: "#7B13B5",
+				highlight: "#5D078D",
 				label: "Available"
 			});
-		console.log(data);
 		return data;
 	}
 }

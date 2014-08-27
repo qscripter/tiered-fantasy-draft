@@ -19,7 +19,7 @@
 	<div class="row">
 		<div class="col-md-6">
 			<h3>Total Contract Allocations</h3>
-			<table class="table">
+			<table class="table table-hover table-striped">
 				<thead>
 					<tr>
 						<th>Year</th>
@@ -33,10 +33,10 @@
 					{{#each contractTotals}}
 					<tr>
 						<td>Current + {{ index }}</td>
-						<td>{{ bonus }}</td>
-						<td>{{ salary }}</td>
-						<td>{{ total }}</td>
-						<td>{{ remaining }}</td>
+						<td>${{ bonus }}</td>
+						<td>${{ salary }}</td>
+						<td>${{ total }}</td>
+						<td>${{ remaining }}</td>
 					</tr>
 					{{/each }}
 				</tbody>
@@ -50,7 +50,7 @@
 		<div class="col-md-12">
 			<h3>Current Contracts</h3>
 			<div class="table-responsive">
-				<table class="table text-center">
+				<table class="table text-center table-hover table-striped">
 					<thead>
 						<tr class="no-border">
 							<th></th>

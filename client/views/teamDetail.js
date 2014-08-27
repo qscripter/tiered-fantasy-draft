@@ -53,7 +53,7 @@ Template.teamDetail.team = function () {
 
 Template.teamDetail.salaryError = function () {
 	return Session.get("salaryError");
-}
+};
 
 Template.teamDetail.player = function () {
 	return Players.findOne(this.player_id);
