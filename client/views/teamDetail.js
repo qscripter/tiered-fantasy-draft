@@ -118,16 +118,16 @@ Template.teamDetail.currentYearEdit = function () {
 }
 
 Template.teamDetail.availableContractYears = function () {
-	arr = [];
-	team = Teams.findOne(Session.get("selectedTeam"));
-	fourYearContracts = _.reduce(team.roster, function(memo, contract){
+	var arr = [];
+	var team = Teams.findOne(Session.get("selectedTeam"));
+	var fourYearContracts = _.reduce(team.roster, function(memo, contract){
 		if (contract.contractYears == 4) {
 			return memo + 1
 		} else {
 			return memo
 		}
 	}, 0);
-	threeYearContracts = _.reduce(team.roster, function(memo, contract){
+	var threeYearContracts = _.reduce(team.roster, function(memo, contract){
 		if (contract.contractYears == 3) {
 			return memo + 1
 		} else {
@@ -136,7 +136,7 @@ Template.teamDetail.availableContractYears = function () {
 	}, 0);
 	arr.push({year: 1, selected: 1==this.contractYears});
 	arr.push({year: 2, selected: 2==this.contractYears});
-	if ((threeYearContracts < 2 || this.contractYears == 3) && (this.bid > 3 || this.bid == 1)) {
+	if (((threeYearContracts < 2 || this.contractYears == 3) && (this.bid > 3)) || this.bid == 1) {
 		arr.push({year: 3, selected: 3==this.contractYears});
 	}
 	if ((fourYearContracts < 1 || this.contractYears == 4) && this.bid > 3) {

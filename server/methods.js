@@ -126,23 +126,35 @@ Meteor.methods({
 	updatePlayerBid: function (teamId, playerId, bid) {
 		if (Roles.userIsInRole(this.userId, ['admin'])) {
 			bid = parseInt(bid, 10);
-			var bonus, salary;
+			var bonus, salary, salaryAllocation;
 			if (bid > 1) {
 				bonus = Math.ceil(bid / 2);
 				salary = bid - bonus;
+				Teams.update({
+					_id: teamId,
+					"roster.player_id": playerId
+				},
+				{$set: {
+					'roster.$.bid': bid,
+					'roster.$.salaryAllocation.0.bonus': bonus,
+					'roster.$.salaryAllocation.0.salary': salary
+				}});
 			} else {
-				bonus = 0;
-				salary = 1;
+				salaryAllocation = [
+					{year: 1, salary: 1, bonus: 0},
+					{year: 2, salary: 1, bonus: 0},
+					{year: 3, salary: 1, bonus: 0}
+				]
+				Teams.update({
+					_id: teamId,
+					"roster.player_id": playerId
+				},
+				{$set: {
+					'roster.$.bid': bid,
+					'roster.$.salaryAllocation': salaryAllocation,
+					'roster.$.contractYears': 3
+				}});
 			}
-			Teams.update({
-				_id: teamId,
-				"roster.player_id": playerId
-			},
-			{$set: {
-				'roster.$.bid': bid,
-				'roster.$.salaryAllocation.0.bonus': bonus,
-				'roster.$.salaryAllocation.0.salary': salary
-			}});
 			
 
 		}
@@ -150,6 +162,7 @@ Meteor.methods({
 	updatePlayerContract: function (teamId, playerId, contractYears) {
 		// update permissions here, allow owners to update contracts for their players if in first contract year
 		var team = Teams.findOne(teamId);
+		var maxBid = findMaxValidBid(team);
 		var contract = _.find(team.roster, function(contract) {
 			return contract.player_id == playerId;
 		});
@@ -164,7 +177,6 @@ Meteor.methods({
 			{$set: {'roster.$.contractYears': contractYears}});
 
 			// update for other contract years
-			// TODO: this craps out with there are odd bid values
 			roster = team.roster;
 			bid = contract.bid;
 			if (bid == 1) {
@@ -180,15 +192,13 @@ Meteor.methods({
 				i = 0;
 				while(i<contractYears) {
 					var bonus, salary;
-					if (bonusTotal > 1 && i<contractYears - 1) {
-						bonus = Math.ceil(bonusTotal / 2);
+					// spread bonus evenly
+					bonus = Math.ceil(bonusTotal / (contractYears - i));
+					// 25% of salary in 1st year, rest is spread evenly
+					if (i == 0) {
+						salary = Math.ceil((salaryTotal + bonusTotal) / 4);
 					} else {
-						bonus = bonusTotal;
-					}
-					if (salaryTotal > 1 && i<contractYears - 1) {
-						salary = Math.ceil(salaryTotal / 2);
-					} else {
-						salary = salaryTotal;
+						salary = Math.ceil(salaryTotal / (contractYears - i));
 					}
 					salaryAllocation.push({
 						year: i+1,
