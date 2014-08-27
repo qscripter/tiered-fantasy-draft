@@ -84,7 +84,7 @@ Template.teamDetail.contractYearClass= function (parent) {
 Template.teamDetail.contractYearsEditable = function () {
 	team = Teams.findOne(Session.get("selectedTeam"));
 	if (team) {
-		return (team.owner == Meteor.user()._id && this.currentYear == 1) || Roles.userIsInRole(Meteor.user()._id, ['admin']);
+		return (team.owner == Meteor.user()._id && this.currentYear == 1 && this.bid > 1) || Roles.userIsInRole(Meteor.user()._id, ['admin']);
 	}
 }
 
@@ -108,7 +108,7 @@ Template.teamDetail.contractEdit = function () {
 Template.teamDetail.contractEditable = function () {
 	team = Teams.findOne(Session.get("selectedTeam"));
 	if (team) {
-		return (team.owner == Meteor.user()._id || Roles.userIsInRole(Meteor.user()._id, ['admin'])) && this.contractYears > 1;
+		return (team.owner == Meteor.user()._id && this.contractYears > 1 && this.bid > 1) || Roles.userIsInRole(Meteor.user()._id, ['admin']);
 	}
 	return false;
 }
@@ -119,17 +119,43 @@ Template.teamDetail.currentYearEdit = function () {
 
 Template.teamDetail.availableContractYears = function () {
 	arr = [];
-	for (var i=1; i<5; i++) {
-		arr.push({year: i, selected: i==this.contractYears});
-	};
+	team = Teams.findOne(Session.get("selectedTeam"));
+	fourYearContracts = _.reduce(team.roster, function(memo, contract){
+		if (contract.contractYears == 4) {
+			return memo + 1
+		} else {
+			return memo
+		}
+	}, 0);
+	threeYearContracts = _.reduce(team.roster, function(memo, contract){
+		if (contract.contractYears == 3) {
+			return memo + 1
+		} else {
+			return memo
+		}
+	}, 0);
+	arr.push({year: 1, selected: 1==this.contractYears});
+	arr.push({year: 2, selected: 2==this.contractYears});
+	if ((threeYearContracts < 2 || this.contractYears == 3) && (this.bid > 3 || this.bid == 1)) {
+		arr.push({year: 3, selected: 3==this.contractYears});
+	}
+	if ((fourYearContracts < 1 || this.contractYears == 4) && this.bid > 3) {
+		arr.push({year: 4, selected: 4==this.contractYears});
+	}
 	return arr;
 }
 
 Template.teamDetail.bonusTotal = function() {
+	if (this.bid == 1){
+		return 0;
+	}
 	return Math.ceil(this.bid * this.contractYears / 2);
 }
 
 Template.teamDetail.salaryTotal = function () {
+	if (this.bid == 1){
+		return 3;
+	}
 	return (this.bid * this.contractYears - Math.ceil(this.bid * this.contractYears/2));
 }
 

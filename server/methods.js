@@ -126,12 +126,14 @@ Meteor.methods({
 	updatePlayerBid: function (teamId, playerId, bid) {
 		if (Roles.userIsInRole(this.userId, ['admin'])) {
 			bid = parseInt(bid, 10);
-			var bonus = Math.ceil(bid / 2);
-			var salary = bid - bonus;
-			var contract = Teams.find({
-				_id: teamId,
-				"roster.player_id": playerId
-			}).fetch()[0].roster[0];
+			var bonus, salary;
+			if (bid > 1) {
+				bonus = Math.ceil(bid / 2);
+				salary = bid - bonus;
+			} else {
+				bonus = 0;
+				salary = 1;
+			}
 			Teams.update({
 				_id: teamId,
 				"roster.player_id": playerId
@@ -165,30 +167,38 @@ Meteor.methods({
 			// TODO: this craps out with there are odd bid values
 			roster = team.roster;
 			bid = contract.bid;
-			bonusTotal = Math.ceil(bid *contractYears / 2);
-			salaryTotal = bid * contractYears - bonusTotal;
-			salaryAllocation = [];
-			i = 0;
-			while(i<contractYears) {
-				var bonus, salary;
-				if (bonusTotal > 1 && i<contractYears - 1) {
-					bonus = Math.ceil(bonusTotal / 2);
-				} else {
-					bonus = bonusTotal;
+			if (bid == 1) {
+				salaryAllocation = [
+					{year: 1, bonus: 0, salary: 1},
+					{year: 2, bonus: 0, salary: 1},
+					{year: 3, bonus: 0, salary: 1},
+				];
+			} else {
+				bonusTotal = Math.ceil(bid *contractYears / 2);
+				salaryTotal = bid * contractYears - bonusTotal;
+				salaryAllocation = [];
+				i = 0;
+				while(i<contractYears) {
+					var bonus, salary;
+					if (bonusTotal > 1 && i<contractYears - 1) {
+						bonus = Math.ceil(bonusTotal / 2);
+					} else {
+						bonus = bonusTotal;
+					}
+					if (salaryTotal > 1 && i<contractYears - 1) {
+						salary = Math.ceil(salaryTotal / 2);
+					} else {
+						salary = salaryTotal;
+					}
+					salaryAllocation.push({
+						year: i+1,
+						bonus: bonus,
+						salary: salary,
+					})
+					bonusTotal -= bonus;
+					salaryTotal -= salary;
+					i++;
 				}
-				if (salaryTotal > 1 && i<contractYears - 1) {
-					salary = Math.ceil(salaryTotal / 2);
-				} else {
-					salary = salaryTotal;
-				}
-				salaryAllocation.push({
-					year: i+1,
-					bonus: bonus,
-					salary: salary,
-				})
-				bonusTotal -= bonus;
-				salaryTotal -= salary;
-				i++;
 			}
 			Teams.update({
 				_id: teamId,
