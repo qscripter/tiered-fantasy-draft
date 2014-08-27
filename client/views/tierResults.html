@@ -24,7 +24,10 @@
 				<tbody>
 					{{#each tier.winningBids }}
 						<tr>
-							<td>{{ playerObj.name }}</td>
+							<td>
+								{{ playerObj.name }}
+								{{#if playerObj.rfa }}<div><small>RFA: {{ rfaTeamName playerObj.rfa }}</small></div> {{/if }}
+							</td>
 							<td><div class="text-center">{{ playerObj.team }}</div></td>
 							<td><div class="text-center">{{ playerObj.bye }}</div></td>
 							<td><div class="text-center"><span class="position {{ playerObj.position }}">{{ playerObj.position }}</span></div></td>

@@ -91,6 +91,10 @@ Router.map(function() {
 				this.render('loading');
 		}
 	});
+	this.route('players',{
+		path: '/players',
+		template: 'players'
+	});
 	this.route('currentTier', {
 		path: '/current-tier',
 		waitOn: function () {

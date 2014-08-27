@@ -1,0 +1,43 @@
+<template name="players">
+	<div class="row">
+		<div class="col-md-12">
+			<table class="table table-responsive">
+				<thead>
+					<tr>
+						<th>Name</th>
+						<th>Team</th>
+						<th>Bye</th>
+						<th>Pos</th>
+						<th>Tier</th>
+						<th>Owner</th>
+						<th>RFA</th>
+					</tr>
+				</thead>
+				<tbody>
+					{{#each players}}
+						<tr>
+							<td>{{ name }}</td>
+							<td>{{ team }}</td>
+							<td>{{ bye }}</td>
+							<td><span class="position {{ position }}">{{ position }}</span></td>
+							<td><a href="/tiers/{{ tier._id }}">{{ tier.name }}</a></td>
+							<td><a href="/teams/{{ owner._id }}">{{ owner.name }}</a></td>
+							<td>
+							{{#if isInRole 'admin' }}
+								<select class="form-control rfa">
+									<option></option>
+									{{#each teams}}
+									<option selected="{{ isRfaTeam .. }}" value="{{ _id }}">{{ name }}</option>
+									{{/each }}
+								</select>
+							{{ else }}
+								<a href="/teams/{{ rfaTeam._id }}">{{ rfaTeam.name }}</a>
+							{{/if }}
+							</td>
+						</tr>
+					{{/each}}
+				</tbody>
+			</table>
+		</div>
+	</div>
+</template>

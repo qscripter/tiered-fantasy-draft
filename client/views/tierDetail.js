@@ -51,6 +51,10 @@ Template.tierDetail.players = function () {
 	}
 };
 
+Template.tierDetail.rfaTeamName = function (teamId) {
+	return Teams.findOne(teamId).name;
+}
+
 Template.tierDetail.indexOfPlayer = function (playerId) {
 	var tier = Tiers.findOne(Session.get("selectedTier"));
 	return _.indexOf(tier.players, playerId) + 1;

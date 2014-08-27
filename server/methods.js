@@ -350,5 +350,10 @@ Meteor.methods({
 				Players.insert(nfl_dst[i]);
 			}
 		}
+	},
+	setPlayerRfa: function (playerId, teamId) {
+		if (Roles.userIsInRole(this.userId, ['admin'])) {
+			Players.update(playerId, {$set: {rfa: teamId}});
+		}
 	}
 });

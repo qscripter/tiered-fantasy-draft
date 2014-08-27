@@ -33,7 +33,7 @@ function validateContractAllocation(salaryAllocation, bid) {
 		Session.set("salaryError", "Your salary numbers don't add up.");
 		return false;
 	}
-	if ((salaryAllocation[0].salary + salaryAllocation[0].bonus) > calculateMaxBid()) {
+	if ((salaryAllocation[0].salary + salaryAllocation[0].bonus) > (calculateMaxBid() - bid)) {
 		Session.set("salaryError", "This contract would violate your salary cap!");
 		return false;
 	}
@@ -128,7 +128,7 @@ Template.teamDetail.availableContractYears = function () {
 		}
 	}, 0);
 	var threeYearContracts = _.reduce(team.roster, function(memo, contract){
-		if (contract.contractYears == 3) {
+		if (contract.contractYears == 3 && contract.bid != 1) {
 			return memo + 1
 		} else {
 			return memo

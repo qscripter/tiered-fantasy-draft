@@ -36,7 +36,10 @@
 					<tbody>
 						{{#each players }}
 							<tr>
-								<td>{{ name }}</td>
+								<td>
+									{{ name }}
+									{{#if rfa }}<div><small>RFA: {{ rfaTeamName rfa }}</small></div> {{/if }}
+								</td>
 								<td><div class="text-center">{{ team }}</div></td>
 								<td><div class="text-center">{{ bye }}</div></td>
 								<td><div class="text-center"><span class="position {{position}}">{{ position }}</span></div></td>

@@ -19,6 +19,15 @@ Meteor.publish("players", function () {
 	return Players.find();
 });
 
+Players.allow({
+	insert: function (userId, team) {
+		return Roles.userIsInRole(userId, ['admin']);
+	},
+	update: function (userId, team) {
+		return Roles.userIsInRole(userId, ['admin']);
+	}
+});
+
 Meteor.publish("tiers", function () {
 	return Tiers.find();
 });

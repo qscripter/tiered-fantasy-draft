@@ -10,6 +10,10 @@ Template.tierResults.teamObj = function () {
 	return Teams.findOne(this.team);
 };
 
+Template.tierResults.rfaTeamName = function (teamId) {
+	return Teams.findOne(teamId).name;
+}
+
 Template.tierResults.events({
 	'click #rollBack': function (event) {
 		Meteor.call("rollTierBack", Session.get("selectedTier"));
