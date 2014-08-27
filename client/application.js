@@ -87,7 +87,8 @@ Router.map(function() {
 			if (this.ready()) {
 				var team = Teams.findOne({owner: Meteor.user()._id});
 				this.redirect('/teams/' + team._id);
-			}
+			} else
+				this.render('loading');
 		}
 	});
 	this.route('currentTier', {
@@ -100,7 +101,8 @@ Router.map(function() {
 				var tier = Tiers.findOne({active: true});
 				Session.set('selectedTier', tier._id);
 				this.render('tierDetail');
-			}
+			} else
+				this.render('loading');
 		}
 	});
 });

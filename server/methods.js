@@ -333,5 +333,12 @@ Meteor.methods({
 				}
 			}
 		}
+	},
+	addDst: function () {
+		if (Roles.userIsInRole(this.userId, ['admin'])) {
+			for (var i=0; i<nfl_dst.length; i++) {
+				Players.insert(nfl_dst[i]);
+			}
+		}
 	}
 });

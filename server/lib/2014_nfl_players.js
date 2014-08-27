@@ -1524,18 +1524,6 @@ nfl_players = [
     "adp":146
   },
   {
-    "rank":128,
-    "name":"Seattle Seahawks",
-    "position":"DST",
-    "team":"SEA",
-    "bye":4,
-    "best_rank":102,
-    "worst_rank":205,
-    "ave_rank":131,
-    "std_dev":16.80844459,
-    "adp":60
-  },
-  {
     "rank":129,
     "name":"Ladarius Green",
     "position":"TE",
@@ -1908,18 +1896,6 @@ nfl_players = [
     "adp":152
   },
   {
-    "rank":160,
-    "name":"San Francisco 49ers",
-    "position":"DST",
-    "team":"SF",
-    "bye":8,
-    "best_rank":111,
-    "worst_rank":206,
-    "ave_rank":158.3714286,
-    "std_dev":21.5261777,
-    "adp":79
-  },
-  {
     "rank":161,
     "name":"Andrew Hawkins",
     "position":"WR",
@@ -2028,18 +2004,6 @@ nfl_players = [
     "adp":149
   },
   {
-    "rank":170,
-    "name":"Carolina Panthers",
-    "position":"DST",
-    "team":"CAR",
-    "bye":12,
-    "best_rank":135,
-    "worst_rank":207,
-    "ave_rank":166.8125,
-    "std_dev":17.68551226,
-    "adp":82
-  },
-  {
     "rank":171,
     "name":"Robert Woods",
     "position":"WR",
@@ -2086,18 +2050,6 @@ nfl_players = [
     "ave_rank":159.9230769,
     "std_dev":22.34678273,
     "adp":200
-  },
-  {
-    "rank":175,
-    "name":"St. Louis Rams",
-    "position":"DST",
-    "team":"STL",
-    "bye":4,
-    "best_rank":129,
-    "worst_rank":211,
-    "ave_rank":168.8484848,
-    "std_dev":20.43188419,
-    "adp":101
   },
   {
     "rank":176,
@@ -2184,18 +2136,6 @@ nfl_players = [
     "adp":233
   },
   {
-    "rank":183,
-    "name":"Cincinnati Bengals",
-    "position":"DST",
-    "team":"CIN",
-    "bye":4,
-    "best_rank":134,
-    "worst_rank":209,
-    "ave_rank":175.3125,
-    "std_dev":15.35911273,
-    "adp":108
-  },
-  {
     "rank":184,
     "name":"Tre Mason",
     "position":"RB",
@@ -2218,18 +2158,6 @@ nfl_players = [
     "ave_rank":164.5,
     "std_dev":26.55277763,
     "adp":238
-  },
-  {
-    "rank":186,
-    "name":"Denver Broncos",
-    "position":"DST",
-    "team":"DEN",
-    "bye":4,
-    "best_rank":137,
-    "worst_rank":210,
-    "ave_rank":175.3571429,
-    "std_dev":18.94204372,
-    "adp":100
   },
   {
     "rank":187,
@@ -2266,18 +2194,6 @@ nfl_players = [
     "ave_rank":168.3684211,
     "std_dev":21.42848701,
     "adp":211
-  },
-  {
-    "rank":190,
-    "name":"New England Patriots",
-    "position":"DST",
-    "team":"NE",
-    "bye":10,
-    "best_rank":137,
-    "worst_rank":212,
-    "ave_rank":177.6153846,
-    "std_dev":19.18147528,
-    "adp":110
   },
   {
     "rank":191,
@@ -2388,18 +2304,6 @@ nfl_players = [
     "adp":232
   },
   {
-    "rank":200,
-    "name":"Arizona Cardinals",
-    "position":"DST",
-    "team":"ARI",
-    "bye":4,
-    "best_rank":146,
-    "worst_rank":208,
-    "ave_rank":180.8947368,
-    "std_dev":16.58120285,
-    "adp":103
-  },
-  {
     "rank":201,
     "name":"Stepfan Taylor",
     "position":"RB",
@@ -2482,18 +2386,6 @@ nfl_players = [
     "ave_rank":182.8125,
     "std_dev":15.25294541,
     "adp":248
-  },
-  {
-    "rank":208,
-    "name":"Kansas City Chiefs",
-    "position":"DST",
-    "team":"KC",
-    "bye":6,
-    "best_rank":136,
-    "worst_rank":213,
-    "ave_rank":184.25,
-    "std_dev":16.00976265,
-    "adp":105
   },
   {
     "rank":209,
@@ -2604,18 +2496,6 @@ nfl_players = [
     "adp":null
   },
   {
-    "rank":218,
-    "name":"Cleveland Browns",
-    "position":"DST",
-    "team":"CLE",
-    "bye":4,
-    "best_rank":170,
-    "worst_rank":199,
-    "ave_rank":184.5454545,
-    "std_dev":10.02146457,
-    "adp":168
-  },
-  {
     "rank":219,
     "name":"Lance Moore",
     "position":"WR",
@@ -2650,18 +2530,6 @@ nfl_players = [
     "ave_rank":184.2857143,
     "std_dev":30.09847782,
     "adp":null
-  },
-  {
-    "rank":222,
-    "name":"Houston Texans",
-    "position":"DST",
-    "team":"HOU",
-    "bye":10,
-    "best_rank":149,
-    "worst_rank":198,
-    "ave_rank":178.1428571,
-    "std_dev":16.71977932,
-    "adp":139
   },
   {
     "rank":223,
@@ -2772,18 +2640,6 @@ nfl_players = [
     "adp":null
   },
   {
-    "rank":232,
-    "name":"Tampa Bay Buccaneers",
-    "position":"DST",
-    "team":"TB",
-    "bye":7,
-    "best_rank":150,
-    "worst_rank":215,
-    "ave_rank":188.875,
-    "std_dev":19.52202282,
-    "adp":176
-  },
-  {
     "rank":233,
     "name":"Nate Washington",
     "position":"WR",
@@ -2830,18 +2686,6 @@ nfl_players = [
     "ave_rank":181,
     "std_dev":12.61744824,
     "adp":null
-  },
-  {
-    "rank":237,
-    "name":"Baltimore Ravens",
-    "position":"DST",
-    "team":"BAL",
-    "bye":11,
-    "best_rank":178,
-    "worst_rank":214,
-    "ave_rank":191.3333333,
-    "std_dev":10.21980648,
-    "adp":184
   },
   {
     "rank":238,
@@ -2952,18 +2796,6 @@ nfl_players = [
     "adp":null
   },
   {
-    "rank":247,
-    "name":"Chicago Bears",
-    "position":"DST",
-    "team":"CHI",
-    "bye":9,
-    "best_rank":168,
-    "worst_rank":182,
-    "ave_rank":173.6666667,
-    "std_dev":6.018490028,
-    "adp":159
-  },
-  {
     "rank":248,
     "name":"Matt Schaub",
     "position":"QB",
@@ -3024,18 +2856,6 @@ nfl_players = [
     "adp":null
   },
   {
-    "rank":253,
-    "name":"Buffalo Bills",
-    "position":"DST",
-    "team":"BUF",
-    "bye":9,
-    "best_rank":149,
-    "worst_rank":211,
-    "ave_rank":186,
-    "std_dev":22.737634,
-    "adp":179
-  },
-  {
     "rank":254,
     "name":"Austin Seferian-Jenkins",
     "position":"TE",
@@ -3058,30 +2878,6 @@ nfl_players = [
     "ave_rank":196.8571429,
     "std_dev":19.31267956,
     "adp":null
-  },
-  {
-    "rank":256,
-    "name":"Pittsburgh Steelers",
-    "position":"DST",
-    "team":"PIT",
-    "bye":12,
-    "best_rank":156,
-    "worst_rank":199,
-    "ave_rank":180.3333333,
-    "std_dev":18.00617178,
-    "adp":165
-  },
-  {
-    "rank":257,
-    "name":"New Orleans Saints",
-    "position":"DST",
-    "team":"NO",
-    "bye":6,
-    "best_rank":167,
-    "worst_rank":216,
-    "ave_rank":193.1666667,
-    "std_dev":14.79207746,
-    "adp":161
   },
   {
     "rank":258,
@@ -3336,18 +3132,6 @@ nfl_players = [
     "adp":null
   },
   {
-    "rank":279,
-    "name":"Green Bay Packers",
-    "position":"DST",
-    "team":"GB",
-    "bye":9,
-    "best_rank":181,
-    "worst_rank":189,
-    "ave_rank":185,
-    "std_dev":4,
-    "adp":167
-  },
-  {
     "rank":280,
     "name":"Adrien Robinson",
     "position":"TE",
@@ -3370,18 +3154,6 @@ nfl_players = [
     "ave_rank":202.25,
     "std_dev":17.64050736,
     "adp":180
-  },
-  {
-    "rank":282,
-    "name":"New York Jets",
-    "position":"DST",
-    "team":"NYJ",
-    "bye":11,
-    "best_rank":183,
-    "worst_rank":216,
-    "ave_rank":197.25,
-    "std_dev":12.39707627,
-    "adp":229
   },
   {
     "rank":283,
@@ -3478,18 +3250,6 @@ nfl_players = [
     "ave_rank":209,
     "std_dev":13.72953022,
     "adp":175
-  },
-  {
-    "rank":291,
-    "name":"Philadelphia Eagles",
-    "position":"DST",
-    "team":"PHI",
-    "bye":7,
-    "best_rank":194,
-    "worst_rank":241,
-    "ave_rank":217.5,
-    "std_dev":23.5,
-    "adp":212
   },
   {
     "rank":292,
@@ -3611,4 +3371,487 @@ nfl_players = [
     "std_dev":12.5,
     "adp":227
   }
+]
+
+nfl_dst = [
+      {
+        "rank":128,
+        "name":"Seattle Seahawks ST",
+        "position":"ST",
+        "team":"SEA",
+        "bye":4,
+        "best_rank":102,
+        "worst_rank":205,
+        "ave_rank":131,
+        "std_dev":16.80844459,
+        "adp":60
+      },
+    {
+        "rank":160,
+        "name":"San Francisco 49ers ST",
+        "position":"ST",
+        "team":"SF",
+        "bye":8,
+        "best_rank":111,
+        "worst_rank":206,
+        "ave_rank":158.3714286,
+        "std_dev":21.5261777,
+        "adp":79
+      },
+    {
+        "rank":170,
+        "name":"Carolina Panthers ST",
+        "position":"ST",
+        "team":"CAR",
+        "bye":12,
+        "best_rank":135,
+        "worst_rank":207,
+        "ave_rank":166.8125,
+        "std_dev":17.68551226,
+        "adp":82
+      },
+    {
+        "rank":175,
+        "name":"St. Louis Rams ST",
+        "position":"ST",
+        "team":"STL",
+        "bye":4,
+        "best_rank":129,
+        "worst_rank":211,
+        "ave_rank":168.8484848,
+        "std_dev":20.43188419,
+        "adp":101
+      },
+    {
+        "rank":183,
+        "name":"Cincinnati Bengals ST",
+        "position":"ST",
+        "team":"CIN",
+        "bye":4,
+        "best_rank":134,
+        "worst_rank":209,
+        "ave_rank":175.3125,
+        "std_dev":15.35911273,
+        "adp":108
+      },
+    {
+        "rank":186,
+        "name":"Denver Broncos ST",
+        "position":"ST",
+        "team":"DEN",
+        "bye":4,
+        "best_rank":137,
+        "worst_rank":210,
+        "ave_rank":175.3571429,
+        "std_dev":18.94204372,
+        "adp":100
+      },
+    {
+        "rank":190,
+        "name":"New England Patriots ST",
+        "position":"ST",
+        "team":"NE",
+        "bye":10,
+        "best_rank":137,
+        "worst_rank":212,
+        "ave_rank":177.6153846,
+        "std_dev":19.18147528,
+        "adp":110
+      },
+    {
+        "rank":200,
+        "name":"Arizona Cardinals ST",
+        "position":"ST",
+        "team":"ARI",
+        "bye":4,
+        "best_rank":146,
+        "worst_rank":208,
+        "ave_rank":180.8947368,
+        "std_dev":16.58120285,
+        "adp":103
+      },
+    {
+        "rank":208,
+        "name":"Kansas City Chiefs ST",
+        "position":"ST",
+        "team":"KC",
+        "bye":6,
+        "best_rank":136,
+        "worst_rank":213,
+        "ave_rank":184.25,
+        "std_dev":16.00976265,
+        "adp":105
+      },
+    {
+        "rank":218,
+        "name":"Cleveland Browns ST",
+        "position":"ST",
+        "team":"CLE",
+        "bye":4,
+        "best_rank":170,
+        "worst_rank":199,
+        "ave_rank":184.5454545,
+        "std_dev":10.02146457,
+        "adp":168
+      },
+    {
+        "rank":222,
+        "name":"Houston Texans ST",
+        "position":"ST",
+        "team":"HOU",
+        "bye":10,
+        "best_rank":149,
+        "worst_rank":198,
+        "ave_rank":178.1428571,
+        "std_dev":16.71977932,
+        "adp":139
+      },
+    {
+        "rank":232,
+        "name":"Tampa Bay Buccaneers ST",
+        "position":"ST",
+        "team":"TB",
+        "bye":7,
+        "best_rank":150,
+        "worst_rank":215,
+        "ave_rank":188.875,
+        "std_dev":19.52202282,
+        "adp":176
+      },
+    {
+        "rank":237,
+        "name":"Baltimore Ravens ST",
+        "position":"ST",
+        "team":"BAL",
+        "bye":11,
+        "best_rank":178,
+        "worst_rank":214,
+        "ave_rank":191.3333333,
+        "std_dev":10.21980648,
+        "adp":184
+      },
+    {
+        "rank":247,
+        "name":"Chicago Bears ST",
+        "position":"ST",
+        "team":"CHI",
+        "bye":9,
+        "best_rank":168,
+        "worst_rank":182,
+        "ave_rank":173.6666667,
+        "std_dev":6.018490028,
+        "adp":159
+      },
+    {
+        "rank":253,
+        "name":"Buffalo Bills ST",
+        "position":"ST",
+        "team":"BUF",
+        "bye":9,
+        "best_rank":149,
+        "worst_rank":211,
+        "ave_rank":186,
+        "std_dev":22.737634,
+        "adp":179
+      },
+    {
+        "rank":256,
+        "name":"Pittsburgh Steelers ST",
+        "position":"ST",
+        "team":"PIT",
+        "bye":12,
+        "best_rank":156,
+        "worst_rank":199,
+        "ave_rank":180.3333333,
+        "std_dev":18.00617178,
+        "adp":165
+      },
+    {
+        "rank":257,
+        "name":"New Orleans Saints ST",
+        "position":"ST",
+        "team":"NO",
+        "bye":6,
+        "best_rank":167,
+        "worst_rank":216,
+        "ave_rank":193.1666667,
+        "std_dev":14.79207746,
+        "adp":161
+      },
+    {
+        "rank":279,
+        "name":"Green Bay Packers ST",
+        "position":"ST",
+        "team":"GB",
+        "bye":9,
+        "best_rank":181,
+        "worst_rank":189,
+        "ave_rank":185,
+        "std_dev":4,
+        "adp":167
+      },
+    {
+        "rank":282,
+        "name":"New York Jets ST",
+        "position":"ST",
+        "team":"NYJ",
+        "bye":11,
+        "best_rank":183,
+        "worst_rank":216,
+        "ave_rank":197.25,
+        "std_dev":12.39707627,
+        "adp":229
+      },
+    {
+        "rank":291,
+        "name":"Philadelphia Eagles ST",
+        "position":"ST",
+        "team":"PHI",
+        "bye":7,
+        "best_rank":194,
+        "worst_rank":241,
+        "ave_rank":217.5,
+        "std_dev":23.5,
+        "adp":212
+      },
+      {
+        "rank":128,
+        "name":"Seattle Seahawks D",
+        "position":"D",
+        "team":"SEA",
+        "bye":4,
+        "best_rank":102,
+        "worst_rank":205,
+        "ave_rank":131,
+        "std_dev":16.80844459,
+        "adp":60
+      },
+    {
+        "rank":160,
+        "name":"San Francisco 49ers D",
+        "position":"D",
+        "team":"SF",
+        "bye":8,
+        "best_rank":111,
+        "worst_rank":206,
+        "ave_rank":158.3714286,
+        "std_dev":21.5261777,
+        "adp":79
+      },
+    {
+        "rank":170,
+        "name":"Carolina Panthers D",
+        "position":"D",
+        "team":"CAR",
+        "bye":12,
+        "best_rank":135,
+        "worst_rank":207,
+        "ave_rank":166.8125,
+        "std_dev":17.68551226,
+        "adp":82
+      },
+    {
+        "rank":175,
+        "name":"St. Louis Rams D",
+        "position":"D",
+        "team":"STL",
+        "bye":4,
+        "best_rank":129,
+        "worst_rank":211,
+        "ave_rank":168.8484848,
+        "std_dev":20.43188419,
+        "adp":101
+      },
+    {
+        "rank":183,
+        "name":"Cincinnati Bengals D",
+        "position":"D",
+        "team":"CIN",
+        "bye":4,
+        "best_rank":134,
+        "worst_rank":209,
+        "ave_rank":175.3125,
+        "std_dev":15.35911273,
+        "adp":108
+      },
+    {
+        "rank":186,
+        "name":"Denver Broncos D",
+        "position":"D",
+        "team":"DEN",
+        "bye":4,
+        "best_rank":137,
+        "worst_rank":210,
+        "ave_rank":175.3571429,
+        "std_dev":18.94204372,
+        "adp":100
+      },
+    {
+        "rank":190,
+        "name":"New England Patriots D",
+        "position":"D",
+        "team":"NE",
+        "bye":10,
+        "best_rank":137,
+        "worst_rank":212,
+        "ave_rank":177.6153846,
+        "std_dev":19.18147528,
+        "adp":110
+      },
+    {
+        "rank":200,
+        "name":"Arizona Cardinals D",
+        "position":"D",
+        "team":"ARI",
+        "bye":4,
+        "best_rank":146,
+        "worst_rank":208,
+        "ave_rank":180.8947368,
+        "std_dev":16.58120285,
+        "adp":103
+      },
+    {
+        "rank":208,
+        "name":"Kansas City Chiefs D",
+        "position":"D",
+        "team":"KC",
+        "bye":6,
+        "best_rank":136,
+        "worst_rank":213,
+        "ave_rank":184.25,
+        "std_dev":16.00976265,
+        "adp":105
+      },
+    {
+        "rank":218,
+        "name":"Cleveland Browns D",
+        "position":"D",
+        "team":"CLE",
+        "bye":4,
+        "best_rank":170,
+        "worst_rank":199,
+        "ave_rank":184.5454545,
+        "std_dev":10.02146457,
+        "adp":168
+      },
+    {
+        "rank":222,
+        "name":"Houston Texans D",
+        "position":"D",
+        "team":"HOU",
+        "bye":10,
+        "best_rank":149,
+        "worst_rank":198,
+        "ave_rank":178.1428571,
+        "std_dev":16.71977932,
+        "adp":139
+      },
+    {
+        "rank":232,
+        "name":"Tampa Bay Buccaneers D",
+        "position":"D",
+        "team":"TB",
+        "bye":7,
+        "best_rank":150,
+        "worst_rank":215,
+        "ave_rank":188.875,
+        "std_dev":19.52202282,
+        "adp":176
+      },
+    {
+        "rank":237,
+        "name":"Baltimore Ravens D",
+        "position":"D",
+        "team":"BAL",
+        "bye":11,
+        "best_rank":178,
+        "worst_rank":214,
+        "ave_rank":191.3333333,
+        "std_dev":10.21980648,
+        "adp":184
+      },
+    {
+        "rank":247,
+        "name":"Chicago Bears D",
+        "position":"D",
+        "team":"CHI",
+        "bye":9,
+        "best_rank":168,
+        "worst_rank":182,
+        "ave_rank":173.6666667,
+        "std_dev":6.018490028,
+        "adp":159
+      },
+    {
+        "rank":253,
+        "name":"Buffalo Bills D",
+        "position":"D",
+        "team":"BUF",
+        "bye":9,
+        "best_rank":149,
+        "worst_rank":211,
+        "ave_rank":186,
+        "std_dev":22.737634,
+        "adp":179
+      },
+    {
+        "rank":256,
+        "name":"Pittsburgh Steelers D",
+        "position":"D",
+        "team":"PIT",
+        "bye":12,
+        "best_rank":156,
+        "worst_rank":199,
+        "ave_rank":180.3333333,
+        "std_dev":18.00617178,
+        "adp":165
+      },
+    {
+        "rank":257,
+        "name":"New Orleans Saints D",
+        "position":"D",
+        "team":"NO",
+        "bye":6,
+        "best_rank":167,
+        "worst_rank":216,
+        "ave_rank":193.1666667,
+        "std_dev":14.79207746,
+        "adp":161
+      },
+    {
+        "rank":279,
+        "name":"Green Bay Packers D",
+        "position":"D",
+        "team":"GB",
+        "bye":9,
+        "best_rank":181,
+        "worst_rank":189,
+        "ave_rank":185,
+        "std_dev":4,
+        "adp":167
+      },
+    {
+        "rank":282,
+        "name":"New York Jets D",
+        "position":"D",
+        "team":"NYJ",
+        "bye":11,
+        "best_rank":183,
+        "worst_rank":216,
+        "ave_rank":197.25,
+        "std_dev":12.39707627,
+        "adp":229
+      },
+    {
+        "rank":291,
+        "name":"Philadelphia Eagles D",
+        "position":"D",
+        "team":"PHI",
+        "bye":7,
+        "best_rank":194,
+        "worst_rank":241,
+        "ave_rank":217.5,
+        "std_dev":23.5,
+        "adp":212
+      }
 ]
