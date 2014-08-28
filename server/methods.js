@@ -355,5 +355,13 @@ Meteor.methods({
 		if (Roles.userIsInRole(this.userId, ['admin'])) {
 			Players.update(playerId, {$set: {rfa: teamId}});
 		}
+	},
+	moveTierPlayer: function (playerId, newIndex) {
+		if (Roles.userIsInRole(this.userId, ['admin'])) {
+			var tier = Tiers.findOne({"players": playerId});
+			var newPlayerArray = _.without(tier.players, playerId);
+			newPlayerArray.splice(newIndex, 0, playerId)
+			Tiers.update(tier._id, {$set: {players: newPlayerArray}});
+		}
 	}
 });

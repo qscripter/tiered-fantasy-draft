@@ -1,5 +1,5 @@
 Template.tiers.tiers = function () {
-	return Tiers.find();
+	return Tiers.find({}, {sort: {name: 1}});
 };
 
 Template.tiers.events({

@@ -19,45 +19,43 @@
 				</div>
 			{{/if }}
 			<div class="clearfix"></div>
-			<div class="table-responsive">
-				<table class="table">
-					<thead>
+			<table class="table table-responsive">
+				<thead>
+					<tr>
+						<th>Name</th>
+						<th><div class="text-center">Team</div></th>
+						<th><div class="text-center">Bye</div></th>
+						<th><div class="text-center">Pos</div></th>
+						<th><div class="pull-right">Bid</div></th>
+						{{#if isInRole 'admin' }}
+						<th></th>
+						{{/if }}
+					</tr>
+				</thead>
+				<tbody>
+					{{#each players }}
 						<tr>
-							<th>Name</th>
-							<th><div class="text-center">Team</div></th>
-							<th><div class="text-center">Bye</div></th>
-							<th><div class="text-center">Pos</div></th>
-							<th><div class="pull-right">Bid</div></th>
+							<td>
+								{{ name }}
+								{{#if rfa }}<div><small>RFA: {{ rfaTeamName rfa }}</small></div> {{/if }}
+							</td>
+							<td><div class="text-center">{{ team }}</div></td>
+							<td><div class="text-center">{{ bye }}</div></td>
+							<td><div class="text-center"><span class="position {{position}}">{{ position }}</span></div></td>
+							<td>
+								{{#if bidSubmitted }}
+									<div class="pull-right">${{ playerBid.bid }}</div>
+								{{ else }}
+									<div class="pull-right form-group"><input type="text" class="form-control bid" id="{{_id}}"></div><div class="pull-right">$</div>
+								{{/if }}
+							</td>
 							{{#if isInRole 'admin' }}
-							<th></th>
+							<td><span class="glyphicon glyphicon-trash deletePlayer"></span></td>
 							{{/if }}
 						</tr>
-					</thead>
-					<tbody>
-						{{#each players }}
-							<tr>
-								<td>
-									{{ name }}
-									{{#if rfa }}<div><small>RFA: {{ rfaTeamName rfa }}</small></div> {{/if }}
-								</td>
-								<td><div class="text-center">{{ team }}</div></td>
-								<td><div class="text-center">{{ bye }}</div></td>
-								<td><div class="text-center"><span class="position {{position}}">{{ position }}</span></div></td>
-								<td>
-									{{#if bidSubmitted }}
-										<div class="pull-right">${{ playerBid.bid }}</div>
-									{{ else }}
-										<div class="pull-right form-group"><input type="text" class="form-control bid" id="{{_id}}"></div><div class="pull-right">$</div>
-									{{/if }}
-								</td>
-								{{#if isInRole 'admin' }}
-								<td><span class="glyphicon glyphicon-trash deletePlayer"></span></td>
-								{{/if }}
-							</tr>
-						{{/each }}
-					</tbody>
-				</table>
-			</div>
+					{{/each }}
+				</tbody>
+			</table>
 			{{#if tier.active }}
 				{{#if bidSubmitted }}
 					<div class="text-center"><h4>Waiting for other teams . . .</h4></div>
