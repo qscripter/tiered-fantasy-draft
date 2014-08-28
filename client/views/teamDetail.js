@@ -121,6 +121,10 @@ Template.teamDetail.league = function () {
 	return Leagues.findOne();
 }
 
+Template.teamDetail.currentContractValue = function () {
+	return this.salaryAllocation[this.currentYear - 1].bonus + this.salaryAllocation[this.currentYear - 1].salary;
+}
+
 Template.teamDetail.getPositionContracts = function (position) {
 	var team = Teams.findOne(Session.get("selectedTeam"));
 	var contracts = _.map(team.roster, function(contract) {

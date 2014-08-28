@@ -61,6 +61,7 @@
 							<th></th>
 							<th></th>
 							<th></th>
+							<th></th>
 							<th><div class="text-center">Contract Allocation</div></th>
 							{{#if isInRole 'admin' }}
 							<th></th>
@@ -74,6 +75,7 @@
 							<th><div class="text-center callout" data-toggle="tooltip" data-placement="top" title="Bid Value">Bid</div></th>
 							<th><div class="text-center callout" data-toggle="tooltip" data-placement="top" title="Total Contract Value">TV</div></th>
 							<th><div class="text-center callout" data-toggle="tooltip" data-placement="top" title="Total Contract Years">TY</div></th>
+							<th><div class="text-center callout" data-toggle="tooltip" data-placement="top" title="Current Year Contract Value">CV</div></th>
 							<th><div class="text-center callout" data-toggle="tooltip" data-placement="top" title="Current Contract Year">CY</div></th>
 							<th>
 								<div class="fake-column">Year</div>
@@ -117,6 +119,7 @@
 										{{ contractYears }}
 									{{/if }}
 								</td>
+								<td>${{ currentContractValue }}</td>
 								<td>
 									{{#if currentYearEdit }}
 										<input id="current-year-edit" class="form-control" type="text" value="{{ currentYear }}">
