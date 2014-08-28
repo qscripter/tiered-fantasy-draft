@@ -87,7 +87,8 @@
 						</tr>
 					</thead>
 					<tbody>
-						{{#each team.roster}}
+						{{#each league.positions }}
+						{{#each getPositionContracts position }}
 							<tr>
 								<td><div class="text-left">{{ player.name }}</div></td>
 								<td>{{ player.team }}</td>
@@ -182,6 +183,7 @@
 									<td><span class="glyphicon glyphicon-trash deletePlayer"></span></td>
 								{{/if }}
 							</tr>
+						{{/each }}
 						{{/each }}
 					</tbody>
 				</table>

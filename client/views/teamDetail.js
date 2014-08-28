@@ -117,6 +117,26 @@ Template.teamDetail.currentYearEdit = function () {
 	return Session.get("currentYearEdit") == this.player_id;
 }
 
+Template.teamDetail.league = function () {
+	return Leagues.findOne();
+}
+
+Template.teamDetail.getPositionContracts = function (position) {
+	var team = Teams.findOne(Session.get("selectedTeam"));
+	var contracts = _.map(team.roster, function(contract) {
+		var player = Players.findOne(contract.player_id);
+		contract.rank = player.rank;
+		contract.position = player.position;
+		return contract;
+	});
+	console.log(contracts);
+	var contracts = _.filter(contracts, function (contract) {
+		return position == contract.position;	
+	});
+	console.log(contracts);
+	return _.sortBy(contracts, function (contract) { return contract.rank });
+}
+
 Template.teamDetail.availableContractYears = function () {
 	var arr = [];
 	var team = Teams.findOne(Session.get("selectedTeam"));
