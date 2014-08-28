@@ -4,7 +4,7 @@ function getPositionPlayers (position) {
 		var playerIds = _.map(myTeam.roster, function (roster) {
 			return roster.player_id;
 		});
-		var players = Players.find({$and: [{_id: {$in: playerIds}}, {position: position}]});
+		var players = Players.find({$and: [{_id: {$in: playerIds}}, {position: position}]}, {sort: {rank: 1}});
 		return players;
 	}
 }

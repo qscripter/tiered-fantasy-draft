@@ -363,5 +363,14 @@ Meteor.methods({
 			newPlayerArray.splice(newIndex, 0, playerId)
 			Tiers.update(tier._id, {$set: {players: newPlayerArray}});
 		}
+	},
+	addPlayerSorts: function () {
+		if (Roles.userIsInRole(this.userId, ['admin'])) {
+			var positions = Leagues.findOne().positions
+			for (var i=0; i < positions.length; i++) {
+				Players.update({position: positions[i].position}, {$set: {positionSort: i}}, {multi: true});
+			}
+			Players.remove({position: "DST"}, {multi: true});
+		}
 	}
 });

@@ -1,5 +1,5 @@
 Template.players.players = function () {
-	return Players.find({}, {sort: {position: -1, name: 1}});
+	return Players.find({}, {sort: {positionSort: 1, rank: 1}});
 };
 
 Template.players.owner = function () {
