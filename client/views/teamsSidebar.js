@@ -13,6 +13,10 @@ Template.teamsSidebar.bidSubmitted = function () {
 	return null;
 };
 
+Template.teamsSidebar.playerCount = function () {
+	return this.roster.length;
+}
+
 Template.teamsSidebar.salaryCommitted = function () {
 	return _.reduce(this.roster, function (memo, contract){
 		var salaryYear = _.find(contract.salaryAllocation, function (allocation){

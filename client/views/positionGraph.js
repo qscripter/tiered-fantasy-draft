@@ -28,6 +28,11 @@ var positions = [
 		position: 'ST',
 		background: '#c32e9b',
 		border: '#a32080'
+	},
+	{
+		position: 'D',
+		background: '#c32e9b',
+		border: '#a32080'
 	}
 ]
 
