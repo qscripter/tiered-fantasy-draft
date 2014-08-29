@@ -20,7 +20,7 @@ var positions = [
 		border: '#46b8da'
 	},
 	{
-		position: 'KK',
+		position: 'K',
 		background: '#f0ad4e',
 		border: '#eea236'
 	},
