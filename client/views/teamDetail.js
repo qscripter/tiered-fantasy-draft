@@ -133,11 +133,9 @@ Template.teamDetail.getPositionContracts = function (position) {
 		contract.position = player.position;
 		return contract;
 	});
-	console.log(contracts);
 	var contracts = _.filter(contracts, function (contract) {
 		return position == contract.position;	
 	});
-	console.log(contracts);
 	return _.sortBy(contracts, function (contract) { return contract.rank });
 }
 

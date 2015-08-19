@@ -364,8 +364,8 @@ Meteor.methods({
 			Tiers.update(tier._id, {$set: {players: newPlayerArray}});
 		}
 	},
-	resetAll: function (override) {
-		if (Roles.userIsInRole(this.userId, ['admin']) && override === 'delete all') {
+	resetTiers: function (override) {
+		if (Roles.userIsInRole(this.userId, ['admin']) && override === 'delete tiers') {
 			Tiers.remove({}, {multi: true});
 		}
 	},
@@ -375,6 +375,22 @@ Meteor.methods({
 			if (user) {
 				Roles.addUsersToRoles(user._id, ['admin']);
 			}
+		}
+	},
+	incrementYear: function () {
+		if (Roles.userIsInRole(this.userId, ['admin'])) {
+			Teams.find().forEach(function (team) {
+				var roster = _.map(team.roster, function(contract) {
+					contract.currentYear++;
+					if (contract.currentYear > contract.contractYears) {
+						return null;
+					} else {
+						return contract;
+					}
+				});
+				roster = _.compact(roster);
+				Teams.update(team._id, {$set: {roster: roster}});
+			});
 		}
 	},
 	addPlayerSorts: function () {
