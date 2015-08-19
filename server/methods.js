@@ -204,7 +204,7 @@ Meteor.methods({
 						year: i+1,
 						bonus: bonus,
 						salary: salary,
-					})
+					});
 					bonusTotal -= bonus;
 					salaryTotal -= salary;
 					i++;
@@ -360,13 +360,26 @@ Meteor.methods({
 		if (Roles.userIsInRole(this.userId, ['admin'])) {
 			var tier = Tiers.findOne({"players": playerId});
 			var newPlayerArray = _.without(tier.players, playerId);
-			newPlayerArray.splice(newIndex, 0, playerId)
+			newPlayerArray.splice(newIndex, 0, playerId);
 			Tiers.update(tier._id, {$set: {players: newPlayerArray}});
+		}
+	},
+	resetAll: function (override) {
+		if (Roles.userIsInRole(this.userId, ['admin']) && override === 'delete all') {
+			Tiers.remove({}, {multi: true});
+		}
+	},
+	addAdmin: function (email) {
+		if (Roles.userIsInRole(this.userId, ['admin'])) {
+			var user = Meteor.users.findOne({"emails.0.address": email});
+			if (user) {
+				Roles.addUsersToRoles(user._id, ['admin']);
+			}
 		}
 	},
 	addPlayerSorts: function () {
 		if (Roles.userIsInRole(this.userId, ['admin'])) {
-			var positions = Leagues.findOne().positions
+			var positions = Leagues.findOne().positions;
 			for (var i=0; i < positions.length; i++) {
 				Players.update({position: positions[i].position}, {$set: {positionSort: i}}, {multi: true});
 			}

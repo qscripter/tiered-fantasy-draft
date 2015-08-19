@@ -4,7 +4,6 @@ Meteor.startup(function () {
 	if (qscripter) {
 		Roles.addUsersToRoles(qscripter._id, ['admin']);
 	}
-	//Tiers.remove({}, {multi: true});
 
 	if (Leagues.find().count() === 0) {
 		var data = {
