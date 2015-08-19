@@ -24,4 +24,14 @@ Meteor.startup(function () {
 		Leagues.insert(data);
 	}
 
+	// TODO: create 2015 players list, assign to nfl_players var
+	_.each(nfl_players, function(player) {
+		var mongoRecord = Players.findOne({name: player.name});
+		if (mongoRecord) {
+			Players.update(mongoRecord._id, {$set: {team: player.team, bye: player.bye}});
+		} else {
+			Players.insert(player);
+		}
+	});
+
 });
