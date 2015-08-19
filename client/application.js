@@ -19,11 +19,12 @@ var IR_BeforeHooks = {
         if (!(Meteor.loggingIn() || Meteor.user())) {
           //Notify.setError(__('Please login.'));
           this.render('login');
-          pause();
+        } else {
+        	this.next();
         }
     }
     // add more before hooks here
-}
+};
 
 // (Global) Before hooks for any route
 Router.onBeforeAction(IR_BeforeHooks.isLoggedIn);
@@ -31,7 +32,7 @@ Router.onBeforeAction(IR_BeforeHooks.isLoggedIn);
 Router.configure({
 	layoutTemplate: 'layoutTemplate',
 	loadingTemplate: 'loading'
-})
+});
 
 //Routes
 Router.map(function() {
